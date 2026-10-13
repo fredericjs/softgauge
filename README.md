@@ -87,6 +87,28 @@ A new gauge component goes in **both** builders (`js/src/gauges.js`,
 `python/src/softgauge/gauges.py`). The fingerprints in `spec.json` catch any difference
 between them.
 
+## Acknowledgements
+
+The idea of judging software against mathematically defined surfaces instead of
+reference software goes back to the work of Todhunter et al. on mathematical reference
+standards for parameter calculation, filtration and form removal [1–5]. Blateyron and
+Breton formalised it for material-ratio parameters as *mathematical softgauges* with
+*mathematical true values* and published two families of Abbott curves [6], which are
+included here in full. Several other gauges follow Todhunter et al.: the cubic
+material-ratio curve and its reordered layouts [2], the parametric planes for Sdr [3],
+the Fourier-series surfaces for Gaussian filtering [1, 4] and total least-squares form
+removal [5]. Their references are defined on the continuous surface, and the sampling
+error is estimated by extrapolating over resolutions. Here the gauges are laid out so
+that the reference also holds for the sampled grid, so implementations are judged at
+floating-point precision and the sampling error is reported exactly.
+
+1. L. Todhunter, R. Leach, S. Lawes, F. Blateyron, and P. Harris, “Development of mathematical reference standards for the validation of surface texture parameter calculation software,” *J. Phys.: Conf. Ser.*, vol. 1065, Art. no. 082004, 2018, doi: [10.1088/1742-6596/1065/8/082004](https://doi.org/10.1088/1742-6596/1065/8/082004).
+2. L. Todhunter, R. Leach, S. Lawes, P. Harris, and F. Blateyron, “Mathematical approach to the validation of functional surface texture parameter software,” *Surf. Topogr.: Metrol. Prop.*, vol. 7, no. 1, Art. no. 015020, 2019, doi: [10.1088/2051-672X/ab07ca](https://doi.org/10.1088/2051-672X/ab07ca).
+3. L. Todhunter, R. Leach, S. Lawes, P. Harris, and F. Blateyron, “Mathematical approach to the validation of field surface texture parameter software,” *Surf. Topogr.: Metrol. Prop.*, vol. 8, no. 1, Art. no. 015010, 2020, doi: [10.1088/2051-672X/ab7367](https://doi.org/10.1088/2051-672X/ab7367).
+4. L. Todhunter, R. Leach, and F. Blateyron, “Mathematical approach to the validation of surface texture filtration software,” *Surf. Topogr.: Metrol. Prop.*, vol. 8, no. 4, Art. no. 045017, 2020, doi: [10.1088/2051-672X/abc0fb](https://doi.org/10.1088/2051-672X/abc0fb).
+5. L. Todhunter, R. Leach, and F. Blateyron, “Mathematical approach to the validation of form removal surface texture software,” *Surf. Topogr.: Metrol. Prop.*, vol. 8, no. 4, Art. no. 045019, 2020, doi: [10.1088/2051-672X/abc737](https://doi.org/10.1088/2051-672X/abc737).
+6. F. Blateyron and S. Breton, “Mathematical softgauges for material ratio parameters,” *Surf. Topogr.: Metrol. Prop.*, vol. 12, no. 3, Art. no. 035036, 2024, doi: [10.1088/2051-672X/ad6f2e](https://doi.org/10.1088/2051-672X/ad6f2e).
+
 ## License
 
 MIT
