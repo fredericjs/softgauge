@@ -18,8 +18,11 @@ comes back. It never imports the implementation under test.
 | `js/` | npm package **`softgauge`**: gauge builder, runner, judge, report generator (ESM, no dependencies, Node and browsers). |
 | `python/` | PyPI package **`softgauge`**: the same in numpy, a pytest helper, and SDF export through [sdfio](https://pypi.org/project/sdfio/). |
 | [`SPEC.md`](SPEC.md) | The contract: conventions, gauge components, operations, measures, judging, result files, versioning. |
+| [`docs/writing-a-binding.md`](docs/writing-a-binding.md) | **How to connect your own software**, step by step, with the conventions that usually trip bindings up. |
 
 ## Three ways to use it
+
+The full walkthrough is in [Writing a binding](docs/writing-a-binding.md).
 
 **1. Through a binding (Python, e.g. in pytest).**
 

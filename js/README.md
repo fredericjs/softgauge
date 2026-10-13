@@ -25,7 +25,8 @@ for (const c of spec.cases) console.log(c.id, judge(c, results.cases[c.id]).verd
 ```
 
 `examples/naive-binding.js` is a complete small binding. `npx softgauge report <results-dir>`
-merges result files into JSON, CSV and LaTeX. The contract (conventions, operations,
+merges result files into JSON, CSV and LaTeX. How to write a binding for your software:
+[docs/writing-a-binding.md](https://github.com/fredericjs/softgauge/blob/main/docs/writing-a-binding.md). The contract (conventions, operations,
 measures, judging) is in [SPEC.md](https://github.com/fredericjs/softgauge/blob/main/SPEC.md).
 
 MIT licensed.
