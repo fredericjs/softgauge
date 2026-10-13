@@ -3,7 +3,7 @@
 This is what an implementation has to understand to be validated with softgauge: how a
 gauge is built, what every operation and measure means, how a result is judged, and
 what a result file looks like. `spec.json` is the machine-readable form; this document
-is the human one. Spec version: **1.2.0**.
+is the human one. Spec version: **1.0.0**.
 
 ## Conventions
 
@@ -150,7 +150,7 @@ A run produces one result file per implementation:
 
 ```json
 { "implementation": { "name": "…", "version": "…", "runtime": "…" },
-  "specVersion": "1.2.0",
+  "specVersion": "1.0.0",
   "gauges": { "<gauge id>": { "ok": true, "maxRelDiff": 0 } },
   "cases": { "<case id>": { "status": "ok"|"unsupported"|"error", "value": 0.897, "nan": false, "error": "…", "ms": 0.4 } },
   "date": "2026-10-13T12:00:00Z" }

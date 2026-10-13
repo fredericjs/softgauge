@@ -22,7 +22,7 @@ import { ARRAY_MEASURES } from '../js/src/measures.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');
-export const SPEC_VERSION = '1.2.0';
+export const SPEC_VERSION = '1.0.0';
 
 // ── tiers (SPEC.md, Tiers) ────────────────────────────────────────────────────
 // core       parameters of an unprocessed gauge: anything that can read the gauge can run it
