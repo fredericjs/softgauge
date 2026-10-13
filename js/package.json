@@ -1,0 +1,23 @@
+{
+  "name": "softgauge",
+  "version": "0.1.0",
+  "description": "Analytic soft gauges for surface texture software (ISO 25178 areal, ISO 21920 profile): gauge height maps, frozen closed-form references, a binding-based runner and the judge.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Frederic Schell",
+  "repository": { "type": "git", "url": "git+https://github.com/fredericjs/softgauge.git", "directory": "js" },
+  "keywords": ["surface texture", "surface metrology", "roughness", "ISO 25178", "ISO 21920", "soft gauge", "validation", "softgauge"],
+  "exports": {
+    ".": "./src/index.js",
+    "./spec": "./src/spec-data.js",
+    "./package.json": "./package.json"
+  },
+  "bin": { "softgauge": "bin/softgauge.js" },
+  "files": ["src", "bin", "examples", "README.md", "LICENSE"],
+  "sideEffects": false,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test",
+    "prepack": "node ../spec/build.js --check"
+  }
+}

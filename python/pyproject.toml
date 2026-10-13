@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "softgauge"
+dynamic = ["version"]
+description = "Analytic soft gauges for surface texture software (ISO 25178 areal, ISO 21920 profile): gauge height maps, frozen closed-form references, a binding-based runner and the judge."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Frederic Schell" }]
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+keywords = ["surface texture", "surface metrology", "roughness", "ISO 25178", "ISO 21920", "soft gauge", "validation"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Software Development :: Testing",
+]
+
+[project.optional-dependencies]
+sdf = ["sdfio>=1.4; python_version >= '3.11'"]
+test = ["pytest>=7", "sdfio>=1.4; python_version >= '3.11'"]
+
+[project.scripts]
+softgauge = "softgauge.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/fredericjs/softgauge"
+Source = "https://github.com/fredericjs/softgauge"
+
+[tool.hatch.version]
+path = "src/softgauge/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/softgauge"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

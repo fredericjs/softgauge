@@ -1,0 +1,11 @@
+{
+  "name": "softgauge-repo",
+  "private": true,
+  "type": "module",
+  "description": "Development scripts of the softgauge repository (the published npm package is js/).",
+  "scripts": {
+    "spec": "node spec/build.js",
+    "check": "node spec/build.js --check",
+    "test": "node spec/build.js --check && cd js && node --test"
+  }
+}
