@@ -661,7 +661,7 @@ export default {
    }
   },
   "sine-f32": {
-   "id": "sine",
+   "id": "sine-f32",
    "title": "Sinusoid (float32 storage)",
    "formula": "z = A·sin(2πx/λ)",
    "description": "The sinusoid gauge stored as 32-bit floats, the storage type of several instrument formats.",
@@ -2850,7 +2850,7 @@ export default {
    }
   },
   "pockets-dither": {
-   "id": "pockets",
+   "id": "pockets-dither",
    "title": "Pocket array (dithered)",
    "formula": "pocket array + 0.1 nm deterministic texture",
    "description": "The pocket array with a 0.1 nm noise-like texture (incommensurate sinusoids), as any real measurement has: the cavity detector estimates its threshold from the top-surface noise.",
@@ -3509,391 +3509,6 @@ export default {
     ]
    }
   },
-  "bb-abbott-10": {
-   "id": "bb-abbott-10",
-   "title": "Abbott_10 (polynomial)",
-   "formula": "z = 0.8x − 2x² + 2.2x³, h = 1 − z",
-   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (0.8, -2, 2.2), inflection at mr = 30.3 %.",
-   "nx": 200,
-   "ny": 100,
-   "dx": 1,
-   "dy": 1,
-   "parts": [
-    {
-     "type": "bearingPoly",
-     "coefs": [
-      1,
-      -0.8,
-      2,
-      -2.2
-     ]
-    }
-   ],
-   "fingerprint": {
-    "n": 20000,
-    "mean": 0.7166558327916395,
-    "rms": 0.7585675977349349,
-    "min": -2.220446049250313e-16,
-    "max": 1,
-    "probes": [
-     [
-      0,
-      0,
-      1
-     ],
-     [
-      99,
-      199,
-      -2.220446049250313e-16
-     ],
-     [
-      50,
-      100,
-      0.8227055286489836
-     ],
-     [
-      25,
-      150,
-      0.8890473361675563
-     ],
-     [
-      75,
-      25,
-      0.5949226636069453
-     ]
-    ]
-   }
-  },
-  "bb-abbott-11": {
-   "id": "bb-abbott-11",
-   "title": "Abbott_11 (polynomial)",
-   "formula": "z = 0.6x − 2x² + 2.4x³, h = 1 − z",
-   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (0.6, -2, 2.4), inflection at mr = 27.8 %.",
-   "nx": 200,
-   "ny": 100,
-   "dx": 1,
-   "dy": 1,
-   "parts": [
-    {
-     "type": "bearingPoly",
-     "coefs": [
-      1,
-      -0.6,
-      2,
-      -2.4
-     ]
-    }
-   ],
-   "fingerprint": {
-    "n": 20000,
-    "mean": 0.7666533326666334,
-    "rms": 0.8075783967619982,
-    "min": 1.1102230246251565e-16,
-    "max": 1,
-    "probes": [
-     [
-      0,
-      0,
-      1
-     ],
-     [
-      99,
-      199,
-      1.1102230246251565e-16
-     ],
-     [
-      50,
-      100,
-      0.8979491898863513
-     ],
-     [
-      25,
-      150,
-      0.9371346271543056
-     ],
-     [
-      75,
-      25,
-      0.6603698770581174
-     ]
-    ]
-   }
-  },
-  "bb-abbott-12": {
-   "id": "bb-abbott-12",
-   "title": "Abbott_12 (polynomial)",
-   "formula": "z = 3.9x − 6x² + 3.1x³, h = 1 − z",
-   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (3.9, -6, 3.1), inflection at mr = 64.5 %.",
-   "nx": 200,
-   "ny": 100,
-   "dx": 1,
-   "dy": 1,
-   "parts": [
-    {
-     "type": "bearingPoly",
-     "coefs": [
-      1,
-      -3.9,
-      6,
-      -3.1
-     ]
-    }
-   ],
-   "fingerprint": {
-    "n": 20000,
-    "mean": 0.2750112505625281,
-    "rms": 0.3589926205719015,
-    "min": 0,
-    "max": 1,
-    "probes": [
-     [
-      0,
-      0,
-      1
-     ],
-     [
-      99,
-      199,
-      0
-     ],
-     [
-      50,
-      100,
-      0.1614030168181454
-     ],
-     [
-      25,
-      150,
-      0.3406401675221197
-     ],
-     [
-      75,
-      25,
-      0.1420168841817685
-     ]
-    ]
-   }
-  },
-  "bb-abbott-13": {
-   "id": "bb-abbott-13",
-   "title": "Abbott_13 (polynomial)",
-   "formula": "z = 2.4x − 2x² + 0.6x³, h = 1 − z",
-   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (2.4, -2, 0.6), inflection at mr = 111.1 %.",
-   "nx": 200,
-   "ny": 100,
-   "dx": 1,
-   "dy": 1,
-   "parts": [
-    {
-     "type": "bearingPoly",
-     "coefs": [
-      1,
-      -2.4,
-      2,
-      -0.6
-     ]
-    }
-   ],
-   "fingerprint": {
-    "n": 20000,
-    "mean": 0.3166758337916896,
-    "rms": 0.42517980627814006,
-    "min": 0,
-    "max": 1,
-    "probes": [
-     [
-      0,
-      0,
-      1
-     ],
-     [
-      99,
-      199,
-      0
-     ],
-     [
-      50,
-      100,
-      0.22075623875004324
-     ],
-     [
-      25,
-      150,
-      0.5043490082735615
-     ],
-     [
-      75,
-      25,
-      0.0713449559975714
-     ]
-    ]
-   }
-  },
-  "bb-abbott-14": {
-   "id": "bb-abbott-14",
-   "title": "Abbott_14 (polynomial)",
-   "formula": "z = 0x + 0x² + 1x³, h = 1 − z",
-   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (0, 0, 1), inflection at mr = 0.0 %. Degenerate: the inflection lies at 0 % and the slope vanishes there.",
-   "nx": 200,
-   "ny": 100,
-   "dx": 1,
-   "dy": 1,
-   "parts": [
-    {
-     "type": "bearingPoly",
-     "coefs": [
-      1,
-      0,
-      0,
-      -1
-     ]
-    }
-   ],
-   "fingerprint": {
-    "n": 20000,
-    "mean": 0.7499874993749689,
-    "rms": 0.801779271370868,
-    "min": 0,
-    "max": 1,
-    "probes": [
-     [
-      0,
-      0,
-      1
-     ],
-     [
-      99,
-      199,
-      0
-     ],
-     [
-      50,
-      100,
-      0.8711930549242746
-     ],
-     [
-      25,
-      150,
-      0.9829235792899645
-     ],
-     [
-      75,
-      25,
-      0.5759485028776399
-     ]
-    ]
-   }
-  },
-  "bb-abbott-15": {
-   "id": "bb-abbott-15",
-   "title": "Abbott_15 (polynomial)",
-   "formula": "z = 2.7x − 4.5x² + 2.8x³, h = 1 − z",
-   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (2.7, -4.5, 2.8), inflection at mr = 53.6 %.",
-   "nx": 200,
-   "ny": 100,
-   "dx": 1,
-   "dy": 1,
-   "parts": [
-    {
-     "type": "bearingPoly",
-     "coefs": [
-      1,
-      -2.7,
-      4.5,
-      -2.8
-     ]
-    }
-   ],
-   "fingerprint": {
-    "n": 20000,
-    "mean": 0.4500025001250062,
-    "rms": 0.4990115741393743,
-    "min": 0,
-    "max": 1,
-    "probes": [
-     [
-      0,
-      0,
-      1
-     ],
-     [
-      99,
-      199,
-      0
-     ],
-     [
-      50,
-      100,
-      0.4234996452367161
-     ],
-     [
-      25,
-      150,
-      0.5553092228241738
-     ],
-     [
-      75,
-      25,
-      0.3241279039883045
-     ]
-    ]
-   }
-  },
-  "bb-abbott-16": {
-   "id": "bb-abbott-16",
-   "title": "Abbott_16 (polynomial)",
-   "formula": "z = 3.2x − 5.5x² + 3.3x³, h = 1 − z",
-   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (3.2, -5.5, 3.3), inflection at mr = 55.6 %.",
-   "nx": 200,
-   "ny": 100,
-   "dx": 1,
-   "dy": 1,
-   "parts": [
-    {
-     "type": "bearingPoly",
-     "coefs": [
-      1,
-      -3.2,
-      5.5,
-      -3.3
-     ]
-    }
-   ],
-   "fingerprint": {
-    "n": 20000,
-    "mean": 0.40833791689584475,
-    "rms": 0.45796157189593967,
-    "min": 0,
-    "max": 1,
-    "probes": [
-     [
-      0,
-      0,
-      1
-     ],
-     [
-      99,
-      199,
-      0
-     ],
-     [
-      50,
-      100,
-      0.36163405148038674
-     ],
-     [
-      25,
-      150,
-      0.4843274557695951
-     ],
-     [
-      75,
-      25,
-      0.3008913776273713
-     ]
-    ]
-   }
-  },
   "bb-abbott-02": {
    "id": "bb-abbott-02",
    "title": "Abbott_02 (polynomial)",
@@ -4330,6 +3945,391 @@ export default {
       75,
       25,
       0.24919361017247987
+     ]
+    ]
+   }
+  },
+  "bb-abbott-10": {
+   "id": "bb-abbott-10",
+   "title": "Abbott_10 (polynomial)",
+   "formula": "z = 0.8x − 2x² + 2.2x³, h = 1 − z",
+   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (0.8, -2, 2.2), inflection at mr = 30.3 %.",
+   "nx": 200,
+   "ny": 100,
+   "dx": 1,
+   "dy": 1,
+   "parts": [
+    {
+     "type": "bearingPoly",
+     "coefs": [
+      1,
+      -0.8,
+      2,
+      -2.2
+     ]
+    }
+   ],
+   "fingerprint": {
+    "n": 20000,
+    "mean": 0.7166558327916395,
+    "rms": 0.7585675977349349,
+    "min": -2.220446049250313e-16,
+    "max": 1,
+    "probes": [
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      99,
+      199,
+      -2.220446049250313e-16
+     ],
+     [
+      50,
+      100,
+      0.8227055286489836
+     ],
+     [
+      25,
+      150,
+      0.8890473361675563
+     ],
+     [
+      75,
+      25,
+      0.5949226636069453
+     ]
+    ]
+   }
+  },
+  "bb-abbott-11": {
+   "id": "bb-abbott-11",
+   "title": "Abbott_11 (polynomial)",
+   "formula": "z = 0.6x − 2x² + 2.4x³, h = 1 − z",
+   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (0.6, -2, 2.4), inflection at mr = 27.8 %.",
+   "nx": 200,
+   "ny": 100,
+   "dx": 1,
+   "dy": 1,
+   "parts": [
+    {
+     "type": "bearingPoly",
+     "coefs": [
+      1,
+      -0.6,
+      2,
+      -2.4
+     ]
+    }
+   ],
+   "fingerprint": {
+    "n": 20000,
+    "mean": 0.7666533326666334,
+    "rms": 0.8075783967619982,
+    "min": 1.1102230246251565e-16,
+    "max": 1,
+    "probes": [
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      99,
+      199,
+      1.1102230246251565e-16
+     ],
+     [
+      50,
+      100,
+      0.8979491898863513
+     ],
+     [
+      25,
+      150,
+      0.9371346271543056
+     ],
+     [
+      75,
+      25,
+      0.6603698770581174
+     ]
+    ]
+   }
+  },
+  "bb-abbott-12": {
+   "id": "bb-abbott-12",
+   "title": "Abbott_12 (polynomial)",
+   "formula": "z = 3.9x − 6x² + 3.1x³, h = 1 − z",
+   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (3.9, -6, 3.1), inflection at mr = 64.5 %.",
+   "nx": 200,
+   "ny": 100,
+   "dx": 1,
+   "dy": 1,
+   "parts": [
+    {
+     "type": "bearingPoly",
+     "coefs": [
+      1,
+      -3.9,
+      6,
+      -3.1
+     ]
+    }
+   ],
+   "fingerprint": {
+    "n": 20000,
+    "mean": 0.2750112505625281,
+    "rms": 0.3589926205719015,
+    "min": 0,
+    "max": 1,
+    "probes": [
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      99,
+      199,
+      0
+     ],
+     [
+      50,
+      100,
+      0.1614030168181454
+     ],
+     [
+      25,
+      150,
+      0.3406401675221197
+     ],
+     [
+      75,
+      25,
+      0.1420168841817685
+     ]
+    ]
+   }
+  },
+  "bb-abbott-13": {
+   "id": "bb-abbott-13",
+   "title": "Abbott_13 (polynomial)",
+   "formula": "z = 2.4x − 2x² + 0.6x³, h = 1 − z",
+   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (2.4, -2, 0.6), inflection at mr = 111.1 %.",
+   "nx": 200,
+   "ny": 100,
+   "dx": 1,
+   "dy": 1,
+   "parts": [
+    {
+     "type": "bearingPoly",
+     "coefs": [
+      1,
+      -2.4,
+      2,
+      -0.6
+     ]
+    }
+   ],
+   "fingerprint": {
+    "n": 20000,
+    "mean": 0.3166758337916896,
+    "rms": 0.42517980627814006,
+    "min": 0,
+    "max": 1,
+    "probes": [
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      99,
+      199,
+      0
+     ],
+     [
+      50,
+      100,
+      0.22075623875004324
+     ],
+     [
+      25,
+      150,
+      0.5043490082735615
+     ],
+     [
+      75,
+      25,
+      0.0713449559975714
+     ]
+    ]
+   }
+  },
+  "bb-abbott-14": {
+   "id": "bb-abbott-14",
+   "title": "Abbott_14 (polynomial)",
+   "formula": "z = 0x + 0x² + 1x³, h = 1 − z",
+   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (0, 0, 1), inflection at mr = 0.0 %. Degenerate: the inflection lies at 0 % and the slope vanishes there.",
+   "nx": 200,
+   "ny": 100,
+   "dx": 1,
+   "dy": 1,
+   "parts": [
+    {
+     "type": "bearingPoly",
+     "coefs": [
+      1,
+      0,
+      0,
+      -1
+     ]
+    }
+   ],
+   "fingerprint": {
+    "n": 20000,
+    "mean": 0.7499874993749689,
+    "rms": 0.801779271370868,
+    "min": 0,
+    "max": 1,
+    "probes": [
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      99,
+      199,
+      0
+     ],
+     [
+      50,
+      100,
+      0.8711930549242746
+     ],
+     [
+      25,
+      150,
+      0.9829235792899645
+     ],
+     [
+      75,
+      25,
+      0.5759485028776399
+     ]
+    ]
+   }
+  },
+  "bb-abbott-15": {
+   "id": "bb-abbott-15",
+   "title": "Abbott_15 (polynomial)",
+   "formula": "z = 2.7x − 4.5x² + 2.8x³, h = 1 − z",
+   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (2.7, -4.5, 2.8), inflection at mr = 53.6 %.",
+   "nx": 200,
+   "ny": 100,
+   "dx": 1,
+   "dy": 1,
+   "parts": [
+    {
+     "type": "bearingPoly",
+     "coefs": [
+      1,
+      -2.7,
+      4.5,
+      -2.8
+     ]
+    }
+   ],
+   "fingerprint": {
+    "n": 20000,
+    "mean": 0.4500025001250062,
+    "rms": 0.4990115741393743,
+    "min": 0,
+    "max": 1,
+    "probes": [
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      99,
+      199,
+      0
+     ],
+     [
+      50,
+      100,
+      0.4234996452367161
+     ],
+     [
+      25,
+      150,
+      0.5553092228241738
+     ],
+     [
+      75,
+      25,
+      0.3241279039883045
+     ]
+    ]
+   }
+  },
+  "bb-abbott-16": {
+   "id": "bb-abbott-16",
+   "title": "Abbott_16 (polynomial)",
+   "formula": "z = 3.2x − 5.5x² + 3.3x³, h = 1 − z",
+   "description": "Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact. Polynomial curve (α, β, γ) = (3.2, -5.5, 3.3), inflection at mr = 55.6 %.",
+   "nx": 200,
+   "ny": 100,
+   "dx": 1,
+   "dy": 1,
+   "parts": [
+    {
+     "type": "bearingPoly",
+     "coefs": [
+      1,
+      -3.2,
+      5.5,
+      -3.3
+     ]
+    }
+   ],
+   "fingerprint": {
+    "n": 20000,
+    "mean": 0.40833791689584475,
+    "rms": 0.45796157189593967,
+    "min": 0,
+    "max": 1,
+    "probes": [
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      99,
+      199,
+      0
+     ],
+     [
+      50,
+      100,
+      0.36163405148038674
+     ],
+     [
+      25,
+      150,
+      0.4843274557695951
+     ],
+     [
+      75,
+      25,
+      0.3008913776273713
      ]
     ]
    }
@@ -8410,2053 +8410,6 @@ export default {
   {
    "ops": [],
    "unit": "µm",
-   "id": "bb.abbott-10.Sk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Sk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.24673939393939315,
-    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
-   },
-   "tol": {
-    "abs": 0.004935281407928555
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-10.Spk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Spk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.042565089093864035,
-    "formula": "2·A₁/Smr1"
-   },
-   "tol": {
-    "abs": 0.00045081822912153876
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-10.Svk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Svk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.5757142737567508,
-    "formula": "2·A₂/(100 − Smr2)"
-   },
-   "tol": {
-    "abs": 0.0008588367830563697
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-10.Spkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Spkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.04521824297335042,
-    "formula": "h(0) − y_upper"
-   },
-   "tol": {
-    "abs": 0.004935281407928555
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-10.Svkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Svkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.7080423630872567,
-    "formula": "y_lower − h(100)"
-   },
-   "tol": {
-    "abs": 0.004935281407928555
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-10.Sak1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Sak1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.14234516404869654,
-    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
-   },
-   "tol": {
-    "abs": 0.0010819221948630822
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-10.Sak2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Sak2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 9.713411030626075,
-    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
-   },
-   "tol": {
-    "abs": 0.008732515714710233
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-10.Smr1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Smr1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 6.688352688974697,
-    "formula": "h⁻¹(y_upper)"
-   },
-   "tol": {
-    "abs": 0.8981809720955302
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-10.Smr2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Smr2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 66.2561396393998,
-    "formula": "h⁻¹(y_lower)"
-   },
-   "tol": {
-    "abs": 0.4913428852224736
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-10.Vmp",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Vmp",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.0028316666666666672,
-    "formula": "∫₀^10 (h − h(10)) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.000009320933427268868
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-10.Vmc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Vmc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.2463416666666668,
-    "formula": "Vm(80) − Vm(10)"
-   },
-   "tol": {
-    "abs": 0.0003011901239138105
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-10.Vvv",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Vvv",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.04610666666666667,
-    "formula": "∫_80^100 (h(80) − h) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.0000729672986216354
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-10.Vvc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-10",
-   "measure": {
-    "kind": "param",
-    "name": "Vvc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.17785833333333334,
-    "formula": "Vv(10) − Vv(80)"
-   },
-   "tol": {
-    "abs": 0.0001568556904670552
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-11.Sk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Sk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.1020444444444456,
-    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
-   },
-   "tol": {
-    "abs": 0.0020410929991887296
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-11.Spk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Spk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.03203485796832087,
-    "formula": "2·A₁/Smr1"
-   },
-   "tol": {
-    "abs": 0.00025790880969800683
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-11.Svk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Svk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.6384540646462232,
-    "formula": "2·A₂/(100 − Smr2)"
-   },
-   "tol": {
-    "abs": 0.0006044989914835838
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-11.Spkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Spkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.03544032890292348,
-    "formula": "h(0) − y_upper"
-   },
-   "tol": {
-    "abs": 0.0020410929991887296
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-11.Svkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Svkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.8625152266526308,
-    "formula": "y_lower − h(100)"
-   },
-   "tol": {
-    "abs": 0.0020410929991887296
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-11.Sak1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Sak1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.12334688447474178,
-    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
-   },
-   "tol": {
-    "abs": 0.000672670392344875
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-11.Sak2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Sak2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 13.687138535236778,
-    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
-   },
-   "tol": {
-    "abs": 0.0065740326034760994
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-11.Smr1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Smr1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 7.700791718615951,
-    "formula": "h⁻¹(y_upper)"
-   },
-   "tol": {
-    "abs": 0.6298916919370423
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-11.Smr2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Smr2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 57.1241243711996,
-    "formula": "h⁻¹(y_lower)"
-   },
-   "tol": {
-    "abs": 0.32715763221271066
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-11.Vmp",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Vmp",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.001846666666666666,
-    "formula": "∫₀^10 (h − h(10)) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.000005440545286562969
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-11.Vmc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Vmc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.2447666666666667,
-    "formula": "Vm(80) − Vm(10)"
-   },
-   "tol": {
-    "abs": 0.00032675268257799047
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-11.Vvv",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Vvv",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.05114666666666664,
-    "formula": "∫_80^100 (h(80) − h) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.00008032803532285687
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-11.Vvc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-11",
-   "measure": {
-    "kind": "param",
-    "name": "Vvc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.14163333333333333,
-    "formula": "Vv(10) − Vv(80)"
-   },
-   "tol": {
-    "abs": 0.00012929293390192358
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-12.Sk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Sk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.10343225806451656,
-    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
-   },
-   "tol": {
-    "abs": 0.002068852047494981
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-12.Spk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Spk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.582244088883137,
-    "formula": "2·A₁/Smr1"
-   },
-   "tol": {
-    "abs": 0.0006260683658120365
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-12.Svk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Svk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.09466404879631765,
-    "formula": "2·A₂/(100 − Smr2)"
-   },
-   "tol": {
-    "abs": 0.0003584152055750259
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-12.Spkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Spkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.7844661812709101,
-    "formula": "h(0) − y_upper"
-   },
-   "tol": {
-    "abs": 0.002068852047494981
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-12.Svkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Svkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.11210156066457339,
-    "formula": "y_lower − h(100)"
-   },
-   "tol": {
-    "abs": 0.002068852047494981
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-12.Sak1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Sak1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 11.010246038426208,
-    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
-   },
-   "tol": {
-    "abs": 0.006015940682678521
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-12.Sak2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Sak2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.665497724370536,
-    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
-   },
-   "tol": {
-    "abs": 0.0015729595499983267
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-12.Smr1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Smr1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 37.82003544096466,
-    "formula": "h⁻¹(y_upper)"
-   },
-   "tol": {
-    "abs": 0.31904425240987194
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-12.Smr2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Smr2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 85.93980010716754,
-    "formula": "h⁻¹(y_lower)"
-   },
-   "tol": {
-    "abs": 0.473819236180252
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-12.Vmp",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Vmp",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.015732499999999993,
-    "formula": "∫₀^10 (h − h(10)) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.00005586558866973607
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-12.Vmc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Vmc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.13658750000000008,
-    "formula": "Vm(80) − Vm(10)"
-   },
-   "tol": {
-    "abs": 0.0000961896191816067
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-12.Vvv",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Vvv",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.010119999999999976,
-    "formula": "∫_80^100 (h(80) − h) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.000010081008627967658
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-12.Vvc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-12",
-   "measure": {
-    "kind": "param",
-    "name": "Vvc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.39751249999999994,
-    "formula": "Vv(10) − Vv(80)"
-   },
-   "tol": {
-    "abs": 0.0005128712976555923
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-13.Sk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Sk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.36640000000000084,
-    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
-   },
-   "tol": {
-    "abs": 0.007328732874287347
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-13.Spk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Spk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.5698988223239876,
-    "formula": "2·A₁/Smr1"
-   },
-   "tol": {
-    "abs": 0.0009179830833928359
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-13.Spkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Spkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.6466133333333326,
-    "formula": "h(0) − y_upper"
-   },
-   "tol": {
-    "abs": 0.007328732874287347
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-13.Svkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Svkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": -0.01301333333333344,
-    "formula": "y_lower − h(100)"
-   },
-   "tol": {
-    "abs": 0.007328732874287347
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-13.Sak1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Sak1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 10.592611258943563,
-    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
-   },
-   "tol": {
-    "abs": 0.011362835273504865
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-13.Sak2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Sak2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0,
-    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
-   },
-   "tol": {
-    "abs": 1e-12
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-13.Smr1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Smr1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 37.17365554730577,
-    "formula": "h⁻¹(y_upper)"
-   },
-   "tol": {
-    "abs": 0.6508146456141009
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-13.Smr2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Smr2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 100,
-    "formula": "h⁻¹(y_lower)"
-   },
-   "tol": {
-    "abs": 3.6843683278152213
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-13.Vmp",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Vmp",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.010711666666666664,
-    "formula": "∫₀^10 (h − h(10)) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.00004036403788671563
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-13.Vmc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Vmc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.2589416666666667,
-    "formula": "Vm(80) − Vm(10)"
-   },
-   "tol": {
-    "abs": 0.00009668967169951526
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-13.Vvv",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Vvv",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.005786666666666681,
-    "formula": "∫_80^100 (h(80) − h) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.000014081409453199908
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-13.Vvc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-13",
-   "measure": {
-    "kind": "param",
-    "name": "Vvc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.4676583333333332,
-    "formula": "Vv(10) − Vv(80)"
-   },
-   "tol": {
-    "abs": 0.0003773577414336405
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-14.Sk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Sk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.14400000000000146,
-    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
-   },
-   "tol": {
-    "abs": 0.0028802880298029114
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-14.Svk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Svk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.6863667151353025,
-    "formula": "2·A₂/(100 − Smr2)"
-   },
-   "tol": {
-    "abs": 0.0006465910845554815
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-14.Spkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Spkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": -0.012800000000000589,
-    "formula": "h(0) − y_upper"
-   },
-   "tol": {
-    "abs": 0.0028802880298029114
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-14.Svkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Svkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.8687999999999991,
-    "formula": "y_lower − h(100)"
-   },
-   "tol": {
-    "abs": 0.0028802880298029114
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-14.Sak1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Sak1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0,
-    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
-   },
-   "tol": {
-    "abs": 1e-12
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-14.Sak2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Sak2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 16.88003498915244,
-    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
-   },
-   "tol": {
-    "abs": 0.009037466641597783
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-14.Smr1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Smr1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0,
-    "formula": "h⁻¹(y_upper)"
-   },
-   "tol": {
-    "abs": 2880288028.822913
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-14.Smr2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Smr2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 50.81336371089935,
-    "formula": "h⁻¹(y_lower)"
-   },
-   "tol": {
-    "abs": 0.3918442760128315
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-14.Vmp",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Vmp",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.00007499999999999976,
-    "formula": "∫₀^10 (h − h(10)) dmr / 100"
-   },
-   "tol": {
-    "abs": 6.000610560988728e-7
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-14.Vmc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Vmc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.3071250000000001,
-    "formula": "Vm(80) − Vm(10)"
-   },
-   "tol": {
-    "abs": 0.00030783078722952477
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-14.Vvv",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Vvv",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.04519999999999999,
-    "formula": "∫_80^100 (h(80) − h) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.00007680768254335647
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-14.Vvc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-14",
-   "measure": {
-    "kind": "param",
-    "name": "Vvc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.203875,
-    "formula": "Vv(10) − Vv(80)"
-   },
-   "tol": {
-    "abs": 0.00008220822304824632
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-15.Sk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Sk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.3564857142857139,
-    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
-   },
-   "tol": {
-    "abs": 0.007130427329447125
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-15.Spk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Spk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.3412986265471515,
-    "formula": "2·A₁/Smr1"
-   },
-   "tol": {
-    "abs": 0.0009398982745188879
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-15.Svk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Svk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.2210766590830142,
-    "formula": "2·A₂/(100 − Smr2)"
-   },
-   "tol": {
-    "abs": 0.0008408971931652472
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-15.Spkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Spkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.3944846936662274,
-    "formula": "h(0) − y_upper"
-   },
-   "tol": {
-    "abs": 0.007130427329447125
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-15.Svkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Svkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.2490295920480587,
-    "formula": "y_lower − h(100)"
-   },
-   "tol": {
-    "abs": 0.007130427329447125
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-15.Sak1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Sak1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 3.5836918676329397,
-    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
-   },
-   "tol": {
-    "abs": 0.0064557592880232
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-15.Sak2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Sak2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 1.7831704130384347,
-    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
-   },
-   "tol": {
-    "abs": 0.004571560047085272
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-15.Smr1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Smr1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 21.000329851241528,
-    "formula": "h⁻¹(y_upper)"
-   },
-   "tol": {
-    "abs": 0.6240594849135827
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-15.Smr2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Smr2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 83.8683068539691,
-    "formula": "h⁻¹(y_lower)"
-   },
-   "tol": {
-    "abs": 0.6924792613621428
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-15.Vmp",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Vmp",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.01070999999999999,
-    "formula": "∫₀^10 (h − h(10)) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.000037683770080274286
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-15.Vmc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Vmc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.17745000000000014,
-    "formula": "Vm(80) − Vm(10)"
-   },
-   "tol": {
-    "abs": 0.00017785779232783208
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-15.Vvv",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Vvv",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.02456000000000001,
-    "formula": "∫_80^100 (h(80) − h) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.00003504350656188945
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-15.Vvc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-15",
-   "measure": {
-    "kind": "param",
-    "name": "Vvc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.3083500000000002,
-    "formula": "Vv(10) − Vv(80)"
-   },
-   "tol": {
-    "abs": 0.00037419742828435795
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-16.Sk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Sk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.22364444444444448,
-    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
-   },
-   "tol": {
-    "abs": 0.004473336223511141
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-16.Spk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Spk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.4246464990990854,
-    "formula": "2·A₁/Smr1"
-   },
-   "tol": {
-    "abs": 0.0008068797235397558
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-16.Svk",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Svk",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.21669095772984462,
-    "formula": "2·A₂/(100 − Smr2)"
-   },
-   "tol": {
-    "abs": 0.0006657084131940907
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-16.Spkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Spkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.5218436215093087,
-    "formula": "h(0) − y_upper"
-   },
-   "tol": {
-    "abs": 0.004473336223511141
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-16.Svkx",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Svkx",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 0.2545119340462467,
-    "formula": "y_lower − h(100)"
-   },
-   "tol": {
-    "abs": 0.004473336223511141
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-16.Sak1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Sak1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 5.5978577041069855,
-    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
-   },
-   "tol": {
-    "abs": 0.006389717194498375
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%·µm",
-   "id": "bb.abbott-16.Sak2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Sak2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 1.9479714142341162,
-    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
-   },
-   "tol": {
-    "abs": 0.0038173456556103123
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-16.Smr1",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Smr1",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 26.364789141006447,
-    "formula": "h⁻¹(y_upper)"
-   },
-   "tol": {
-    "abs": 0.4727576860945034
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "%",
-   "id": "bb.abbott-16.Smr2",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Smr2",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021 / ISO 13565-2",
-   "reference": {
-    "value": 82.0207411085172,
-    "formula": "h⁻¹(y_lower)"
-   },
-   "tol": {
-    "abs": 0.5539108355357574
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-16.Vmp",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Vmp",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.01258083333333333,
-    "formula": "∫₀^10 (h − h(10)) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.00004398440044724564
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-16.Vmc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Vmc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.14784583333333354,
-    "formula": "Vm(80) − Vm(10)"
-   },
-   "tol": {
-    "abs": 0.00016175617700758216
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-16.Vvv",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Vvv",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.022493333333333265,
-    "formula": "∫_80^100 (h(80) − h) dmr / 100"
-   },
-   "tol": {
-    "abs": 0.00002944294514008413
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
-   "id": "bb.abbott-16.Vvc",
-   "group": "Material-ratio softgauges (Blateyron & Breton)",
-   "gauge": "bb-abbott-16",
-   "measure": {
-    "kind": "param",
-    "name": "Vvc",
-    "args": []
-   },
-   "standard": "ISO 25178-2:2021",
-   "reference": {
-    "value": 0.3134541666666668,
-    "formula": "Vv(10) − Vv(80)"
-   },
-   "tol": {
-    "abs": 0.00042530254016529483
-   },
-   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
-   "tier": "core",
-   "domain": "areal"
-  },
-  {
-   "ops": [],
-   "unit": "µm",
    "id": "bb.abbott-02.Sk",
    "group": "Material-ratio softgauges (Blateyron & Breton)",
    "gauge": "bb-abbott-02",
@@ -12841,6 +10794,2053 @@ export default {
    },
    "tol": {
     "abs": 0.000364436448919417
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-10.Sk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Sk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.24673939393939315,
+    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
+   },
+   "tol": {
+    "abs": 0.004935281407928555
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-10.Spk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Spk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.042565089093864035,
+    "formula": "2·A₁/Smr1"
+   },
+   "tol": {
+    "abs": 0.00045081822912153876
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-10.Svk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Svk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.5757142737567508,
+    "formula": "2·A₂/(100 − Smr2)"
+   },
+   "tol": {
+    "abs": 0.0008588367830563697
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-10.Spkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Spkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.04521824297335042,
+    "formula": "h(0) − y_upper"
+   },
+   "tol": {
+    "abs": 0.004935281407928555
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-10.Svkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Svkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.7080423630872567,
+    "formula": "y_lower − h(100)"
+   },
+   "tol": {
+    "abs": 0.004935281407928555
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-10.Sak1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Sak1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.14234516404869654,
+    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
+   },
+   "tol": {
+    "abs": 0.0010819221948630822
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-10.Sak2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Sak2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 9.713411030626075,
+    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
+   },
+   "tol": {
+    "abs": 0.008732515714710233
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-10.Smr1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Smr1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 6.688352688974697,
+    "formula": "h⁻¹(y_upper)"
+   },
+   "tol": {
+    "abs": 0.8981809720955302
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-10.Smr2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Smr2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 66.2561396393998,
+    "formula": "h⁻¹(y_lower)"
+   },
+   "tol": {
+    "abs": 0.4913428852224736
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-10.Vmp",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Vmp",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.0028316666666666672,
+    "formula": "∫₀^10 (h − h(10)) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.000009320933427268868
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-10.Vmc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Vmc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.2463416666666668,
+    "formula": "Vm(80) − Vm(10)"
+   },
+   "tol": {
+    "abs": 0.0003011901239138105
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-10.Vvv",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Vvv",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.04610666666666667,
+    "formula": "∫_80^100 (h(80) − h) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.0000729672986216354
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-10.Vvc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-10",
+   "measure": {
+    "kind": "param",
+    "name": "Vvc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.17785833333333334,
+    "formula": "Vv(10) − Vv(80)"
+   },
+   "tol": {
+    "abs": 0.0001568556904670552
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-11.Sk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Sk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.1020444444444456,
+    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
+   },
+   "tol": {
+    "abs": 0.0020410929991887296
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-11.Spk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Spk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.03203485796832087,
+    "formula": "2·A₁/Smr1"
+   },
+   "tol": {
+    "abs": 0.00025790880969800683
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-11.Svk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Svk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.6384540646462232,
+    "formula": "2·A₂/(100 − Smr2)"
+   },
+   "tol": {
+    "abs": 0.0006044989914835838
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-11.Spkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Spkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.03544032890292348,
+    "formula": "h(0) − y_upper"
+   },
+   "tol": {
+    "abs": 0.0020410929991887296
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-11.Svkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Svkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.8625152266526308,
+    "formula": "y_lower − h(100)"
+   },
+   "tol": {
+    "abs": 0.0020410929991887296
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-11.Sak1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Sak1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.12334688447474178,
+    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
+   },
+   "tol": {
+    "abs": 0.000672670392344875
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-11.Sak2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Sak2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 13.687138535236778,
+    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
+   },
+   "tol": {
+    "abs": 0.0065740326034760994
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-11.Smr1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Smr1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 7.700791718615951,
+    "formula": "h⁻¹(y_upper)"
+   },
+   "tol": {
+    "abs": 0.6298916919370423
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-11.Smr2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Smr2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 57.1241243711996,
+    "formula": "h⁻¹(y_lower)"
+   },
+   "tol": {
+    "abs": 0.32715763221271066
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-11.Vmp",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Vmp",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.001846666666666666,
+    "formula": "∫₀^10 (h − h(10)) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.000005440545286562969
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-11.Vmc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Vmc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.2447666666666667,
+    "formula": "Vm(80) − Vm(10)"
+   },
+   "tol": {
+    "abs": 0.00032675268257799047
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-11.Vvv",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Vvv",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.05114666666666664,
+    "formula": "∫_80^100 (h(80) − h) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.00008032803532285687
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-11.Vvc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-11",
+   "measure": {
+    "kind": "param",
+    "name": "Vvc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.14163333333333333,
+    "formula": "Vv(10) − Vv(80)"
+   },
+   "tol": {
+    "abs": 0.00012929293390192358
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-12.Sk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Sk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.10343225806451656,
+    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
+   },
+   "tol": {
+    "abs": 0.002068852047494981
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-12.Spk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Spk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.582244088883137,
+    "formula": "2·A₁/Smr1"
+   },
+   "tol": {
+    "abs": 0.0006260683658120365
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-12.Svk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Svk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.09466404879631765,
+    "formula": "2·A₂/(100 − Smr2)"
+   },
+   "tol": {
+    "abs": 0.0003584152055750259
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-12.Spkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Spkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.7844661812709101,
+    "formula": "h(0) − y_upper"
+   },
+   "tol": {
+    "abs": 0.002068852047494981
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-12.Svkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Svkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.11210156066457339,
+    "formula": "y_lower − h(100)"
+   },
+   "tol": {
+    "abs": 0.002068852047494981
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-12.Sak1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Sak1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 11.010246038426208,
+    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
+   },
+   "tol": {
+    "abs": 0.006015940682678521
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-12.Sak2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Sak2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.665497724370536,
+    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
+   },
+   "tol": {
+    "abs": 0.0015729595499983267
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-12.Smr1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Smr1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 37.82003544096466,
+    "formula": "h⁻¹(y_upper)"
+   },
+   "tol": {
+    "abs": 0.31904425240987194
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-12.Smr2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Smr2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 85.93980010716754,
+    "formula": "h⁻¹(y_lower)"
+   },
+   "tol": {
+    "abs": 0.473819236180252
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-12.Vmp",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Vmp",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.015732499999999993,
+    "formula": "∫₀^10 (h − h(10)) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.00005586558866973607
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-12.Vmc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Vmc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.13658750000000008,
+    "formula": "Vm(80) − Vm(10)"
+   },
+   "tol": {
+    "abs": 0.0000961896191816067
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-12.Vvv",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Vvv",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.010119999999999976,
+    "formula": "∫_80^100 (h(80) − h) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.000010081008627967658
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-12.Vvc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-12",
+   "measure": {
+    "kind": "param",
+    "name": "Vvc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.39751249999999994,
+    "formula": "Vv(10) − Vv(80)"
+   },
+   "tol": {
+    "abs": 0.0005128712976555923
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-13.Sk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Sk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.36640000000000084,
+    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
+   },
+   "tol": {
+    "abs": 0.007328732874287347
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-13.Spk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Spk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.5698988223239876,
+    "formula": "2·A₁/Smr1"
+   },
+   "tol": {
+    "abs": 0.0009179830833928359
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-13.Spkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Spkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.6466133333333326,
+    "formula": "h(0) − y_upper"
+   },
+   "tol": {
+    "abs": 0.007328732874287347
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-13.Svkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Svkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": -0.01301333333333344,
+    "formula": "y_lower − h(100)"
+   },
+   "tol": {
+    "abs": 0.007328732874287347
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-13.Sak1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Sak1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 10.592611258943563,
+    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
+   },
+   "tol": {
+    "abs": 0.011362835273504865
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-13.Sak2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Sak2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0,
+    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
+   },
+   "tol": {
+    "abs": 1e-12
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-13.Smr1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Smr1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 37.17365554730577,
+    "formula": "h⁻¹(y_upper)"
+   },
+   "tol": {
+    "abs": 0.6508146456141009
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-13.Smr2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Smr2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 100,
+    "formula": "h⁻¹(y_lower)"
+   },
+   "tol": {
+    "abs": 3.6843683278152213
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-13.Vmp",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Vmp",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.010711666666666664,
+    "formula": "∫₀^10 (h − h(10)) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.00004036403788671563
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-13.Vmc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Vmc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.2589416666666667,
+    "formula": "Vm(80) − Vm(10)"
+   },
+   "tol": {
+    "abs": 0.00009668967169951526
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-13.Vvv",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Vvv",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.005786666666666681,
+    "formula": "∫_80^100 (h(80) − h) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.000014081409453199908
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-13.Vvc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-13",
+   "measure": {
+    "kind": "param",
+    "name": "Vvc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.4676583333333332,
+    "formula": "Vv(10) − Vv(80)"
+   },
+   "tol": {
+    "abs": 0.0003773577414336405
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-14.Sk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Sk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.14400000000000146,
+    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
+   },
+   "tol": {
+    "abs": 0.0028802880298029114
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-14.Svk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Svk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.6863667151353025,
+    "formula": "2·A₂/(100 − Smr2)"
+   },
+   "tol": {
+    "abs": 0.0006465910845554815
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-14.Spkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Spkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": -0.012800000000000589,
+    "formula": "h(0) − y_upper"
+   },
+   "tol": {
+    "abs": 0.0028802880298029114
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-14.Svkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Svkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.8687999999999991,
+    "formula": "y_lower − h(100)"
+   },
+   "tol": {
+    "abs": 0.0028802880298029114
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-14.Sak1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Sak1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0,
+    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
+   },
+   "tol": {
+    "abs": 1e-12
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-14.Sak2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Sak2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 16.88003498915244,
+    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
+   },
+   "tol": {
+    "abs": 0.009037466641597783
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-14.Smr1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Smr1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0,
+    "formula": "h⁻¹(y_upper)"
+   },
+   "tol": {
+    "abs": 2880288028.822913
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-14.Smr2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Smr2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 50.81336371089935,
+    "formula": "h⁻¹(y_lower)"
+   },
+   "tol": {
+    "abs": 0.3918442760128315
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-14.Vmp",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Vmp",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.00007499999999999976,
+    "formula": "∫₀^10 (h − h(10)) dmr / 100"
+   },
+   "tol": {
+    "abs": 6.000610560988728e-7
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-14.Vmc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Vmc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.3071250000000001,
+    "formula": "Vm(80) − Vm(10)"
+   },
+   "tol": {
+    "abs": 0.00030783078722952477
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-14.Vvv",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Vvv",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.04519999999999999,
+    "formula": "∫_80^100 (h(80) − h) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.00007680768254335647
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-14.Vvc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-14",
+   "measure": {
+    "kind": "param",
+    "name": "Vvc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.203875,
+    "formula": "Vv(10) − Vv(80)"
+   },
+   "tol": {
+    "abs": 0.00008220822304824632
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-15.Sk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Sk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.3564857142857139,
+    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
+   },
+   "tol": {
+    "abs": 0.007130427329447125
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-15.Spk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Spk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.3412986265471515,
+    "formula": "2·A₁/Smr1"
+   },
+   "tol": {
+    "abs": 0.0009398982745188879
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-15.Svk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Svk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.2210766590830142,
+    "formula": "2·A₂/(100 − Smr2)"
+   },
+   "tol": {
+    "abs": 0.0008408971931652472
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-15.Spkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Spkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.3944846936662274,
+    "formula": "h(0) − y_upper"
+   },
+   "tol": {
+    "abs": 0.007130427329447125
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-15.Svkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Svkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.2490295920480587,
+    "formula": "y_lower − h(100)"
+   },
+   "tol": {
+    "abs": 0.007130427329447125
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-15.Sak1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Sak1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 3.5836918676329397,
+    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
+   },
+   "tol": {
+    "abs": 0.0064557592880232
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-15.Sak2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Sak2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 1.7831704130384347,
+    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
+   },
+   "tol": {
+    "abs": 0.004571560047085272
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-15.Smr1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Smr1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 21.000329851241528,
+    "formula": "h⁻¹(y_upper)"
+   },
+   "tol": {
+    "abs": 0.6240594849135827
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-15.Smr2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Smr2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 83.8683068539691,
+    "formula": "h⁻¹(y_lower)"
+   },
+   "tol": {
+    "abs": 0.6924792613621428
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-15.Vmp",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Vmp",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.01070999999999999,
+    "formula": "∫₀^10 (h − h(10)) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.000037683770080274286
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-15.Vmc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Vmc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.17745000000000014,
+    "formula": "Vm(80) − Vm(10)"
+   },
+   "tol": {
+    "abs": 0.00017785779232783208
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-15.Vvv",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Vvv",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.02456000000000001,
+    "formula": "∫_80^100 (h(80) − h) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.00003504350656188945
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-15.Vvc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-15",
+   "measure": {
+    "kind": "param",
+    "name": "Vvc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.3083500000000002,
+    "formula": "Vv(10) − Vv(80)"
+   },
+   "tol": {
+    "abs": 0.00037419742828435795
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-16.Sk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Sk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.22364444444444448,
+    "formula": "y_upper − y_lower of the least-squares line in the flattest 40 % window"
+   },
+   "tol": {
+    "abs": 0.004473336223511141
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-16.Spk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Spk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.4246464990990854,
+    "formula": "2·A₁/Smr1"
+   },
+   "tol": {
+    "abs": 0.0008068797235397558
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-16.Svk",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Svk",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.21669095772984462,
+    "formula": "2·A₂/(100 − Smr2)"
+   },
+   "tol": {
+    "abs": 0.0006657084131940907
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-16.Spkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Spkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.5218436215093087,
+    "formula": "h(0) − y_upper"
+   },
+   "tol": {
+    "abs": 0.004473336223511141
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-16.Svkx",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Svkx",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 0.2545119340462467,
+    "formula": "y_lower − h(100)"
+   },
+   "tol": {
+    "abs": 0.004473336223511141
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-16.Sak1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Sak1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 5.5978577041069855,
+    "formula": "A₁ = ∫₀^Smr1 (h − y_upper) dmr"
+   },
+   "tol": {
+    "abs": 0.006389717194498375
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%·µm",
+   "id": "bb.abbott-16.Sak2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Sak2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 1.9479714142341162,
+    "formula": "A₂ = ∫_Smr2^100 (y_lower − h) dmr"
+   },
+   "tol": {
+    "abs": 0.0038173456556103123
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-16.Smr1",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Smr1",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 26.364789141006447,
+    "formula": "h⁻¹(y_upper)"
+   },
+   "tol": {
+    "abs": 0.4727576860945034
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "bb.abbott-16.Smr2",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Smr2",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021 / ISO 13565-2",
+   "reference": {
+    "value": 82.0207411085172,
+    "formula": "h⁻¹(y_lower)"
+   },
+   "tol": {
+    "abs": 0.5539108355357574
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-16.Vmp",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Vmp",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.01258083333333333,
+    "formula": "∫₀^10 (h − h(10)) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.00004398440044724564
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-16.Vmc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Vmc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.14784583333333354,
+    "formula": "Vm(80) − Vm(10)"
+   },
+   "tol": {
+    "abs": 0.00016175617700758216
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-16.Vvv",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Vvv",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.022493333333333265,
+    "formula": "∫_80^100 (h(80) − h) dmr / 100"
+   },
+   "tol": {
+    "abs": 0.00002944294514008413
+   },
+   "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "µm",
+   "id": "bb.abbott-16.Vvc",
+   "group": "Material-ratio softgauges (Blateyron & Breton)",
+   "gauge": "bb-abbott-16",
+   "measure": {
+    "kind": "param",
+    "name": "Vvc",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.3134541666666668,
+    "formula": "Vv(10) − Vv(80)"
+   },
+   "tol": {
+    "abs": 0.00042530254016529483
    },
    "basis": "material-ratio resolution of the implementation: two classes of 0.01 %, propagated through the local slope of the curve",
    "tier": "core",

@@ -7,6 +7,9 @@
   former JavaScript generator: every string of `spec.json` is unchanged, numbers differ
   by at most 7·10⁻¹⁶ relative (libm last bits; fingerprints now use numpy's pairwise
   summation).
+- Fixed: gauges `sine-f32` and `pockets-dither` carried the id of the gauge they were
+  copied from (`sine`, `pockets`). The Blateyron & Breton gauges and cases are listed in
+  numeric order (02 … 25).
 - First standalone release, extracted from the surfalize webapp's validation suite
   (spec 1.0.0: the same gauges, cases and references; cases gain `tier` and `domain`).
 - JS and Python packages: gauge builders checked against shared fingerprints, a

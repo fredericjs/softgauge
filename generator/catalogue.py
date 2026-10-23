@@ -49,7 +49,8 @@ G: dict[str, dict] = {}
 
 
 def gauge(gid: str, d: dict) -> str:
-    G[gid] = {'id': gid, **d}
+    """Register a gauge; a recipe copied from another gauge (``{**G['sine'], …}``) keeps its own id."""
+    G[gid] = {'id': gid, **{k: v for k, v in d.items() if k != 'id'}}
     return gid
 
 
@@ -435,12 +436,8 @@ def bb_knots(sg):
     return [k for i, k in enumerate(a) if i == 0 or k[0] > a[i - 1][0]]
 
 
-def _JS_ORDER(d):  # the order of the former JS generator (Object.entries: integer keys first)
-    return sorted(d.items(), key=lambda kv: (0, int(kv[0])) if kv[0].isdigit() and str(int(kv[0])) == kv[0] else (1, 0))
-
-
 BB_DESC = 'Material-ratio softgauge of Blateyron & Breton (2024), written there as a depth z(x) below the highest point, x = mr/100; here h = 1 − z (Z = 1 µm), laid out as a ramp of N = 20 000 heights so the sampled curve is exact.'
-for k, (a, b, g) in _JS_ORDER(BB_POLY):
+for k, (a, b, g) in BB_POLY.items():
     degenerate = ' Degenerate: the inflection lies at 0 % and the slope vanishes there.' if k == '14' else ''
     gauge(f'bb-abbott-{k}', {
         'title': f'Abbott_{k} (polynomial)', 'formula': f"z = {num(a)}x {'−' if b < 0 else '+'} {num(abs(b))}x² + {num(g)}x³, h = 1 − z",
@@ -677,7 +674,7 @@ def _abbott():
     # The softgauge families of Blateyron & Breton (2024): Rk construction + volume parameters.
     bb_names = ['Sk', 'Spk', 'Svk', 'Spkx', 'Svkx', 'Sak1', 'Sak2', 'Smr1', 'Smr2', 'Vmp', 'Vmc', 'Vvv', 'Vvc']
     bb_group = 'Material-ratio softgauges (Blateyron & Breton)'
-    for k, (a, b, g) in _JS_ORDER(BB_POLY):
+    for k, (a, b, g) in BB_POLY.items():
         abbott_cases(polynomial_curve([1, -a, -b, -g]), f'bb-abbott-{k}', f'bb.abbott-{k}', False, None, bb_names, bb_group)
     for k, sg in BB_SEG.items():
         abbott_cases(piecewise_linear_curve(bb_knots(sg)), f'bb-abbott-{k}', f'bb.abbott-{k}', False, None, bb_names, bb_group)
