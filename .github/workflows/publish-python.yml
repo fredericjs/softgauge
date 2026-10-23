@@ -1,0 +1,80 @@
+name: Publish Python package
+
+# Push a tag python-v<version> (the version in python/src/softgauge/__init__.py) to publish
+# to PyPI. Run the workflow by hand (Actions → Publish Python package → Run workflow) to
+# publish the current commit to TestPyPI instead, as a dry run.
+#
+# Publishing uses PyPI Trusted Publishing (OIDC): no API token is stored in the
+# repository. On pypi.org and test.pypi.org, add this repository as a trusted publisher
+# for the project softgauge: owner fredericjs, repository softgauge, workflow
+# publish-python.yml, environment pypi (resp. testpypi).
+
+on:
+  push:
+    tags: ['python-v*']
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: the tag matches the package version
+        if: github.event_name == 'push'
+        run: |
+          version=$(python -c "import re; print(re.search(r'__version__ = \"(.+?)\"', open('python/src/softgauge/__init__.py').read()).group(1))")
+          test "${GITHUB_REF_NAME#python-v}" = "$version" || { echo "tag $GITHUB_REF_NAME does not match version $version"; exit 1; }
+      - name: the bundled spec is up to date
+        run: |
+          pip install numpy
+          python generator/build.py --check
+      - name: build the sdist and the wheel
+        run: |
+          pip install build twine
+          python -m build python --outdir dist
+          twine check --strict dist/*
+      - name: test the built wheel
+        run: |
+          pip install "$(ls dist/*.whl)[test]"
+          cd python && pytest -q
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  pypi:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/softgauge/
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+
+  testpypi:
+    if: github.event_name == 'workflow_dispatch'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/project/softgauge/
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/

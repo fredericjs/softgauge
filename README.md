@@ -94,6 +94,13 @@ The generator needs numpy and builds the gauges with the Python adapter
 (`js/src/gauges.js` too); the fingerprints in `spec.json` catch any difference between
 them. CI also checks that both adapters write the same report for the same results.
 
+**Releasing the Python package.** Set `__version__` in `python/src/softgauge/__init__.py`,
+then push a tag `python-v<version>` (e.g. `python-v0.1.0`). The
+[publish workflow](.github/workflows/publish-python.yml) checks the tag against the
+version and the spec copy, builds the sdist and the wheel, runs the tests against the
+built wheel and publishes to PyPI through Trusted Publishing. Running the workflow by
+hand publishes to TestPyPI instead.
+
 ## Acknowledgements
 
 The idea of judging software against mathematically defined surfaces instead of
