@@ -10,11 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-python@v5
         with:
-          node-version: 22
+          python-version: "3.13"
+      - run: pip install numpy
       - name: spec.json is up to date and the package copies are identical
-        run: node spec/build.js --check
+        run: python generator/build.py --check
       - name: licence copies
         run: cmp LICENSE js/LICENSE && cmp LICENSE python/LICENSE
 

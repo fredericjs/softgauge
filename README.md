@@ -14,7 +14,8 @@ comes back. It never imports the implementation under test.
 
 | | |
 |---|---|
-| `spec/` | The catalogue (gauges, cases, closed-form references) → **`spec.json`**, the language-neutral contract. |
+| `spec/` | **`spec.json`**, the language-neutral contract: gauges, cases, frozen references and tolerances. |
+| `generator/` | The Python source of `spec.json`: the catalogue of gauges and cases (`catalogue.py`) and the closed-form references (`reference.py`). |
 | `js/` | npm package **`softgauge`**: gauge builder, runner, judge, report generator (ESM, no dependencies, Node and browsers). |
 | `python/` | PyPI package **`softgauge`**: the same in numpy, a pytest helper, and SDF export through [sdfio](https://pypi.org/project/sdfio/). |
 | [`SPEC.md`](SPEC.md) | The contract: conventions, gauge components, operations, measures, judging, result files, versioning. |
@@ -77,8 +78,8 @@ that gauge with its reference and tolerance.
 ## Development
 
 ```bash
-node spec/build.js                # after editing spec/catalogue.js: regenerates spec.json + the package copies
-node spec/build.js --check        # CI: spec.json is up to date, the copies are identical
+python generator/build.py         # after editing generator/: regenerates spec.json + the package copies
+python generator/build.py --check # CI: spec.json is up to date, the copies are identical
 cd js && node --test
 cd python && pip install -e ".[test]" && pytest
 ```
