@@ -1,0 +1,45 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://github.com/fredericjs/softgauge/blob/main/spec/results.schema.json",
+ "title": "softgauge result file",
+ "description": "What one run of the spec against one implementation produced. JSON has no NaN or Infinity: NaN is value null with nan true, and ±∞ is clamped to ±1e308. See spec/README.md, Results.",
+ "type": "object",
+ "required": ["implementation", "specVersion", "gauges", "cases", "date"],
+ "additionalProperties": false,
+ "properties": {
+  "implementation": {
+   "type": "object",
+   "required": ["name"],
+   "properties": { "name": { "type": "string" }, "version": { "type": "string" }, "runtime": { "type": "string" } }
+  },
+  "specVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+  "gauges": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "object",
+    "required": ["ok", "maxRelDiff"],
+    "additionalProperties": false,
+    "properties": { "ok": { "type": "boolean" }, "maxRelDiff": { "type": "number", "minimum": 0 } }
+   }
+  },
+  "cases": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "object",
+    "required": ["status", "ms"],
+    "additionalProperties": false,
+    "properties": {
+     "status": { "enum": ["ok", "unsupported", "error"] },
+     "value": { "type": ["number", "null"] },
+     "nan": { "type": "boolean" },
+     "error": { "type": "string" },
+     "ms": { "type": "number", "minimum": 0 }
+    },
+    "if": { "properties": { "status": { "const": "ok" } } },
+    "then": { "required": ["value"] },
+    "else": { "required": ["error"] }
+   }
+  },
+  "date": { "type": "string", "format": "date-time" }
+ }
+}

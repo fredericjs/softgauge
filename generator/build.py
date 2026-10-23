@@ -33,7 +33,7 @@ sys.path.insert(0, str(HERE))
 from softgauge.gauges import fingerprint  # noqa: E402
 from softgauge.measures import ARRAY_MEASURES  # noqa: E402
 
-from catalogue import CASES, GAUGES  # noqa: E402
+from catalogue import CASES, GAUGES, REFERENCES  # noqa: E402
 from fmt import dumps, exponential  # noqa: E402
 
 SPEC_VERSION = '1.0.0'
@@ -58,29 +58,76 @@ def tier_of(c: dict) -> str:
     return 'extension'
 
 
+GAUGE_KEYS = ['id', 'title', 'formula', 'description', 'cite', 'profile', 'dtype', 'nx', 'ny', 'dx', 'dy', 'parts', 'spikes', 'holes', 'fingerprint']
+CASE_KEYS = ['id', 'group', 'tier', 'domain', 'gauge', 'cite', 'ops', 'measure', 'unit', 'standards', 'method', 'reference', 'discrete',
+             'expectNaN', 'tol', 'basis', 'note', 'series']
+
+CONVENTIONS = {
+    'units': 'lengths and heights in µm, material ratios in %, angles in degrees',
+    'grid': 'row-major; pixel (r, c) at x = c·dx, y = r·dy (row 0 first); samples are points, so n samples span (n − 1)·dx; crop/mask boxes and circles use y measured from the bottom: yb = (ny − 1 − r)·dy',
+    'angles': 'angles of gauge components are in the (x, y) frame of the gauge; Std is counter-clockwise from +x with y pointing up the map (ISO 25178-2:2021, 3.2.15.1); rotate is counter-clockwise with y up',
+    'formulas': 'formula fields are LaTeX math without delimiters, in plain ASCII; text fields and descriptions are Unicode prose',
+    'judging': 'pass iff |value − ref| ≤ tol.abs + tol.rel·|ref|, where ref = discrete.value if present else reference.value; expectNaN cases pass iff the value is NaN/undefined',
+    'tiers': 'core = parameters of an unprocessed gauge; operators = standard operations measured on the array; extension = non-standard parameters, implementation-specific operations and analysis outputs',
+}
+
+
+def ordered(d: dict, keys: list[str], what: str) -> dict:
+    """``d`` with its keys in the order of ``keys``; unknown keys are an error."""
+    unknown = set(d) - set(keys)
+    if unknown:
+        raise ValueError(f'{what}: unknown keys {sorted(unknown)}')
+    return {k: d[k] for k in keys if k in d}
+
+
+def _check_formula(f: str, where: str) -> None:
+    if not f.isascii() or '$' in f:
+        raise ValueError(f'{where}: a formula must be ASCII LaTeX math without $ delimiters: {f!r}')
+    if f.count('{') != f.count('}'):
+        raise ValueError(f'{where}: unbalanced braces in {f!r}')
+
+
 def build_spec() -> dict:
-    gauges = {gid: {**g, 'fingerprint': fingerprint(g)} for gid, g in GAUGES.items()}
-    ids = set()
+    gauges = {}
+    for gid, g in GAUGES.items():
+        _check_formula(g['formula'], f'gauge {gid}')
+        for key in g.get('cite', []):
+            if key not in REFERENCES:
+                raise ValueError(f'gauge {gid}: unknown reference {key}')
+        gauges[gid] = ordered({**g, 'fingerprint': fingerprint(g)}, GAUGE_KEYS, f'gauge {gid}')
+    ids, cases = set(), []
     for c in CASES:
+        where = f"case {c['id']}"
         if c['id'] in ids:
-            raise ValueError(f"duplicate case id {c['id']}")
+            raise ValueError(f'duplicate {where}')
         ids.add(c['id'])
         if c['gauge'] not in gauges:
-            raise ValueError(f"case {c['id']}: unknown gauge {c['gauge']}")
+            raise ValueError(f"{where}: unknown gauge {c['gauge']}")
+        if not isinstance(c.get('standards'), list):
+            raise ValueError(f'{where}: standards must be a list')
+        for key in c.get('cite', []):
+            if key not in REFERENCES:
+                raise ValueError(f'{where}: unknown reference {key}')
         for r in (c['reference'], c.get('discrete')):
-            if r and r.get('value') is not None and not math.isfinite(r['value']):
-                raise ValueError(f"case {c['id']}: non-finite reference")
+            if r is None:
+                continue
+            if r.get('value') is not None and not math.isfinite(r['value']):
+                raise ValueError(f'{where}: non-finite reference')
+            if 'formula' not in r and 'text' not in r:
+                raise ValueError(f'{where}: a reference needs a formula or a text')
+            if 'formula' in r:
+                _check_formula(r['formula'], where)
+        domain = 'profile' if gauges[c['gauge']].get('profile') else 'areal'
+        cases.append(ordered({**c, 'tier': tier_of(c), 'domain': domain}, CASE_KEYS, where))
     return {
-        'name': 'softgauge: analytic soft gauges for surface texture software',
+        'name': 'softgauge',
+        'title': 'Analytic soft gauges for surface texture software',
         'version': SPEC_VERSION,
-        'conventions': {
-            'units': 'lengths and heights in µm, material ratios in %, angles in degrees',
-            'grid': 'row-major; pixel (r, c) at x = c·dx, y = r·dy (row 0 first); samples are points, so n samples span (n − 1)·dx; crop/mask boxes and circles use y measured from the bottom: yb = (ny − 1 − r)·dy',
-            'judging': 'pass iff |value − ref| ≤ tol.abs + tol.rel·|ref|, where ref = discrete.value if present else reference.value; expectNaN cases pass iff the value is NaN/undefined',
-            'tiers': 'core = parameters of an unprocessed gauge; operators = standard operations measured on the array; extension = non-standard parameters, implementation-specific operations and analysis outputs',
-        },
+        'license': 'MIT',
+        'conventions': CONVENTIONS,
+        'references': REFERENCES,
         'gauges': gauges,
-        'cases': [{**c, 'tier': tier_of(c), 'domain': 'profile' if gauges[c['gauge']].get('profile') else 'areal'} for c in CASES],
+        'cases': cases,
     }
 
 

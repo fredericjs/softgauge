@@ -1,0 +1,165 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://github.com/fredericjs/softgauge/blob/main/spec/spec.schema.json",
+ "title": "softgauge spec",
+ "description": "The softgauge contract: gauges (height-map recipes with fingerprints), cases (operations, measure, frozen reference, tolerance) and their conventions. See spec/README.md.",
+ "type": "object",
+ "required": ["name", "title", "version", "license", "conventions", "references", "gauges", "cases"],
+ "additionalProperties": false,
+ "properties": {
+  "name": { "const": "softgauge" },
+  "title": { "type": "string" },
+  "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+  "license": { "type": "string" },
+  "conventions": {
+   "type": "object",
+   "required": ["units", "grid", "angles", "formulas", "judging", "tiers"],
+   "additionalProperties": { "type": "string" }
+  },
+  "references": {
+   "type": "object",
+   "description": "Literature the gauges and cases are taken from, keyed by citation key.",
+   "additionalProperties": { "$ref": "#/$defs/reference" }
+  },
+  "gauges": {
+   "type": "object",
+   "additionalProperties": { "$ref": "#/$defs/gauge" }
+  },
+  "cases": {
+   "type": "array",
+   "items": { "$ref": "#/$defs/case" }
+  }
+ },
+ "$defs": {
+  "id": { "type": "string", "pattern": "^[^\\s]+$" },
+  "latex": {
+   "description": "LaTeX math without delimiters, in plain ASCII.",
+   "type": "string",
+   "pattern": "^[\\x20-\\x7E]+$",
+   "not": { "pattern": "\\$" }
+  },
+  "cite": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true },
+  "reference": {
+   "type": "object",
+   "required": ["authors", "title", "journal", "volume", "article", "year", "doi"],
+   "additionalProperties": false,
+   "properties": {
+    "authors": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "title": { "type": "string" },
+    "journal": { "type": "string" },
+    "volume": { "type": "string" },
+    "issue": { "type": "string" },
+    "article": { "type": "string" },
+    "year": { "type": "integer" },
+    "doi": { "type": "string", "pattern": "^10\\." }
+   }
+  },
+  "part": {
+   "type": "object",
+   "required": ["type"],
+   "properties": {
+    "type": { "enum": ["const", "plane", "poly", "sine", "cos", "eggcrate", "triangle", "columns", "disc", "bearing", "bearingCos", "bearingPoly", "dither", "sphere", "cylinder", "gauss", "bump", "edge", "pockets"] }
+   }
+  },
+  "fingerprint": {
+   "type": "object",
+   "required": ["n", "mean", "rms", "min", "max", "probes"],
+   "additionalProperties": false,
+   "properties": {
+    "n": { "type": "integer", "minimum": 1 },
+    "mean": { "type": "number" },
+    "rms": { "type": "number", "minimum": 0 },
+    "min": { "type": "number" },
+    "max": { "type": "number" },
+    "probes": {
+     "type": "array",
+     "items": { "type": "array", "prefixItems": [{ "type": "integer" }, { "type": "integer" }, { "type": ["number", "null"] }], "items": false, "minItems": 3 }
+    }
+   }
+  },
+  "gauge": {
+   "type": "object",
+   "required": ["id", "title", "formula", "description", "nx", "ny", "dx", "dy", "parts", "fingerprint"],
+   "additionalProperties": false,
+   "properties": {
+    "id": { "$ref": "#/$defs/id" },
+    "title": { "type": "string" },
+    "formula": { "$ref": "#/$defs/latex" },
+    "description": { "type": "string" },
+    "cite": { "$ref": "#/$defs/cite" },
+    "profile": { "type": "boolean", "description": "A profile gauge: ny = 1, evaluated with the R parameters." },
+    "dtype": { "enum": ["float32", "float64"] },
+    "nx": { "type": "integer", "minimum": 1 },
+    "ny": { "type": "integer", "minimum": 1 },
+    "dx": { "type": "number", "exclusiveMinimum": 0 },
+    "dy": { "type": "number", "exclusiveMinimum": 0 },
+    "parts": { "type": "array", "items": { "$ref": "#/$defs/part" }, "minItems": 1 },
+    "spikes": { "type": "array", "items": { "type": "array", "prefixItems": [{ "type": "integer" }, { "type": "integer" }, { "type": "number" }], "items": false, "minItems": 3 } },
+    "holes": { "type": "array", "items": { "type": "array", "items": { "type": "integer" }, "minItems": 4, "maxItems": 4 } },
+    "fingerprint": { "$ref": "#/$defs/fingerprint" }
+   }
+  },
+  "value": {
+   "description": "A reference value with its LaTeX formula and/or a prose statement.",
+   "type": "object",
+   "required": ["value"],
+   "anyOf": [{ "required": ["formula"] }, { "required": ["text"] }],
+   "additionalProperties": false,
+   "properties": {
+    "value": { "type": ["number", "null"] },
+    "formula": { "$ref": "#/$defs/latex" },
+    "text": { "type": "string" }
+   }
+  },
+  "op": {
+   "type": "object",
+   "required": ["op"],
+   "properties": {
+    "op": { "enum": ["level", "levelTLS", "detrend", "levelPoints", "removeSphere", "removeCylinder", "filter", "center", "zero", "invert", "threshold", "removeOutliers", "despike", "fill", "crop", "zoom", "rotate", "maskRect", "maskCircle", "maskThreshold", "maskInvert", "maskToNaN"] }
+   }
+  },
+  "measure": {
+   "type": "object",
+   "required": ["kind"],
+   "properties": {
+    "kind": { "enum": ["param", "stat", "fieldError", "sineAmplitude", "nanMismatch", "planeGradient", "formRadius", "radialPsd", "fourierPeak", "acfMap", "abbottCurveError", "regionVolume", "fitCircle", "fitLine", "sampleHeight", "profileLine", "cavities"] }
+   },
+   "if": { "properties": { "kind": { "const": "param" } } },
+   "then": { "required": ["name", "args"], "properties": { "name": { "type": "string" }, "args": { "type": "array" } } }
+  },
+  "case": {
+   "type": "object",
+   "required": ["id", "group", "tier", "domain", "gauge", "ops", "measure", "unit", "standards", "reference", "tol", "basis"],
+   "additionalProperties": false,
+   "properties": {
+    "id": { "$ref": "#/$defs/id" },
+    "group": { "type": "string" },
+    "tier": { "enum": ["core", "operators", "extension"] },
+    "domain": { "enum": ["areal", "profile"] },
+    "gauge": { "$ref": "#/$defs/id" },
+    "cite": { "$ref": "#/$defs/cite" },
+    "ops": { "type": "array", "items": { "$ref": "#/$defs/op" } },
+    "measure": { "$ref": "#/$defs/measure" },
+    "unit": { "type": "string" },
+    "standards": { "type": "array", "items": { "type": "string", "pattern": "^ISO \\d+(-\\d+)?:\\d{4}$" }, "uniqueItems": true },
+    "method": { "type": "string" },
+    "reference": { "$ref": "#/$defs/value" },
+    "discrete": { "$ref": "#/$defs/value", "description": "Exact value for the sampled gauge; judged against when present." },
+    "expectNaN": { "type": "boolean" },
+    "tol": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": { "abs": { "type": "number", "minimum": 0 }, "rel": { "type": "number", "minimum": 0 } }
+    },
+    "basis": { "type": "string", "description": "Where the tolerance comes from." },
+    "note": { "type": "string" },
+    "series": {
+     "type": "object",
+     "required": ["id", "label", "x"],
+     "additionalProperties": false,
+     "properties": { "id": { "type": "string" }, "label": { "type": "string" }, "x": { "type": "number" } }
+    }
+   }
+  }
+ }
+}
