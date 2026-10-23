@@ -5,7 +5,7 @@
 //   { z, rows, cols, dx, dy, mask? }   z row-major (NaN = non-measured), mask truthy = masked,
 // and every implementation is then measured by the same code: fieldError, sineAmplitude,
 // nanMismatch, planeGradient and stat. Parameters ('param') and the extension measures
-// stay with the binding (SPEC.md, Measures).
+// stay with the binding (spec/README.md, Measures).
 
 import { buildHeights } from './gauges.js';
 

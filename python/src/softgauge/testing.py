@@ -53,7 +53,8 @@ def check(runner, case, xfail=()):
         msg = f"{case['id']}: error: {res.get('error')}"
     else:
         value = "NaN" if res.get("nan") else res.get("value")
-        msg = (f"{case['id']}: value {value} vs reference {j['ref']} ({case['reference'].get('formula', '')}); "
+        ref = case["reference"]
+        msg = (f"{case['id']}: value {value} vs reference {j['ref']} ({ref.get('formula') or ref.get('text', '')}); "
                f"|error| {abs(j['error']) if j['error'] is not None else '—'} > limit {j['limit']} [{case.get('basis', '')}]")
     if case["id"] in xfail:
         pytest.xfail(msg)

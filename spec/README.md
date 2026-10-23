@@ -1,9 +1,18 @@
-# The softgauge contract
+# The softgauge spec
 
-This is what an implementation has to understand to be validated with softgauge: how a
-gauge is built, what every operation and measure means, how a result is judged, and
-what a result file looks like. `spec.json` is the machine-readable form; this document
-is the human one. Spec version: **1.0.0**.
+This folder is the spec: everything an implementation has to understand to be validated
+with softgauge. It is language-neutral and complete on its own; the JavaScript and Python
+packages are two adapters that read it.
+
+| file | |
+|---|---|
+| [`spec.json`](spec.json) | the spec: gauges, cases, frozen references and tolerances (**version 1.0.0**) |
+| [`spec.schema.json`](spec.schema.json) | its JSON Schema (draft 2020-12) |
+| [`results.schema.json`](results.schema.json) | the JSON Schema of a result file |
+| this document | what the fields mean |
+
+`spec.json` is generated from [`generator/`](../generator) (Python), where every
+reference value is derived. Edit the generator, never the JSON.
 
 ## Conventions
 
@@ -14,18 +23,38 @@ is the human one. Spec version: **1.0.0**.
 - **Boxes and circles** (crop, masks, levelling points) use **y measured from the
   bottom**: yb = (ny − 1 − r)·dy. µm → pixel conversion rounds to the nearest pixel
   (the cases avoid ties, so the tie rule does not matter).
-- **Angles in the array frame** (Std) are measured from +x towards increasing row
-  index. Rotation (`rotate`) is counter-clockwise with y up.
+- **Angles.** Angles that define a gauge component (θ, φ) are in the (x, y) frame of the
+  gauge. **Std** is measured counter-clockwise from +x with y pointing up the map, as
+  ISO 25178-2:2021, 3.2.15.1 defines it. **rotate** turns counter-clockwise with y up.
 - **Non-measured points** are NaN.
 - **Profiles.** A gauge with `profile: true` has `ny = 1`. It is a profile with
   spacing dx, and is evaluated with the R parameters (ISO 21920-2).
 
+### Formulas
+
+Every `formula` field is **LaTeX math without delimiters, in plain ASCII**, e.g.
+`100 \left(\sqrt{1 + a^2 + b^2} - 1\right)`. It renders with KaTeX or MathJax and pastes
+into a paper as `$…$`. Prose never goes into a formula: a reference value carries it
+in `text`, a gauge in its `description` (Unicode is fine there).
+
 ## Gauges
 
-`z(r, c) = Σ parts`. Spikes `[r, c, dz]` are added afterwards, and holes
-`[r0, r1, c0, c1]` (inclusive) are then set to NaN. All values are evaluated in double
-precision; `dtype: 'float32'` rounds the stored result to float32 (a storage-precision
-gauge). x, y and yb are defined as above, and k = r·nx + c is the raster index.
+```json
+"saddle": {
+  "id": "saddle", "title": "Saddle", "formula": "z = k x y",
+  "description": "Hyperbolic paraboloid with its centre on the first grid corner …",
+  "nx": 41, "ny": 81, "dx": 0.5, "dy": 0.25,
+  "parts": [{ "type": "poly", "xc": 0, "yc": 0, "terms": [[1, 1, 0.05]] }],
+  "fingerprint": { "n": 3321, "mean": 5, "rms": …, "min": 0, "max": 20, "probes": [[0, 0, 0], …] }
+}
+```
+
+Optional fields: `cite` (keys into `references`), `profile`, `dtype` (`float32` rounds
+the stored heights: a storage-precision gauge), `spikes` `[r, c, dz]` (added after the
+parts) and `holes` `[r0, r1, c0, c1]` (inclusive, set to NaN last).
+
+`z(r, c) = Σ parts`, evaluated in double precision. x, y and yb are defined as above, and
+k = r·nx + c is the raster index.
 
 | type | z |
 |---|---|
@@ -58,14 +87,29 @@ relative to the gauge RMS (1e−6 for float32 gauges).
 ## Cases
 
 ```json
-{ "id": "height.plane.Sq", "gauge": "plane", "tier": "core", "domain": "areal",
-  "group": "Height parameters", "ops": [], "measure": { "kind": "param", "name": "Sq", "args": [] },
-  "unit": "µm", "standard": "ISO 25178-2:2021",
-  "reference": { "value": 0.8972179, "formula": "√(a²Δx²(nx²−1) + b²Δy²(ny²−1))/√12" },
-  "discrete": { "value": … },           // optional: exact value for the SAMPLED gauge
-  "tol": { "abs": 1e-12, "rel": 1e-9 }, "basis": "where the tolerance comes from",
-  "expectNaN": false, "note": "…", "series": { … } }
+{ "id": "hybrid.saddle.Sdr", "group": "Hybrid parameters", "tier": "core", "domain": "areal",
+  "gauge": "saddle", "ops": [], "measure": { "kind": "param", "name": "Sdr", "args": [] }, "unit": "%",
+  "standards": ["ISO 25178-2:2021"],
+  "reference": { "value": 28.0789…, "formula": "100 \\left(\\frac{1}{W H} \\int_0^W …\\right)" },
+  "discrete":  { "value": 28.0832…, "formula": "…", "text": "trapezoid weights: …" },
+  "tol": { "rel": 1e-9, "abs": 1e-12 }, "basis": "floating-point round-off only (…)",
+  "note": "ISO 25178-2:2021 D.3: each cell is triangulated along both diagonals …" }
 ```
+
+| field | |
+|---|---|
+| `id` | permanent identifier, `<group>.<gauge>.<quantity>` |
+| `group`, `tier`, `domain` | for selecting and reporting (tiers below; domain `areal` or `profile`) |
+| `gauge`, `ops`, `measure` | what to load, what to apply (in order) and what to evaluate |
+| `unit` | of the value |
+| `standards` | the normative documents the quantity is defined by (may be empty) |
+| `method` | what an operation or a non-standard measure computes, in words |
+| `cite` | keys into `references`: the literature the case is taken from |
+| `reference` | `{value, formula?, text?}`: the analytic value, on the continuous surface |
+| `discrete` | the same for the **sampled** gauge, when it has a closed form; judged against when present |
+| `expectNaN` | the quantity is undefined and must be reported as NaN |
+| `tol`, `basis` | `{abs?, rel?}` and where the tolerance comes from |
+| `note`, `series` | remarks; the position of a case in a convergence series |
 
 ### Tiers
 
@@ -74,6 +118,12 @@ relative to the gauge RMS (1e−6 for float32 gauges).
 | `core` | A standard parameter of an unprocessed gauge. Anything that can read the gauge can run it, including software that only opens files (see Files). |
 | `operators` | Standard operations (levelling, form removal, filtering, correction, geometry, masking), measured on the output array or with a standard parameter. |
 | `extension` | Non-standard parameters, implementation-specific operations and analysis outputs. |
+
+### References
+
+`references` is the bibliography of the spec, keyed by citation key (`todhunter2019`,
+`blateyron2024`, …), with authors, title, journal, volume, issue, article number, year
+and DOI. Gauges and cases taken from a paper list its key in `cite`.
 
 ## Operations (`case.ops`, applied in order)
 
@@ -84,7 +134,7 @@ relative to the gauge RMS (1e−6 for float32 gauges).
 | `detrend` | degree | subtract the least-squares polynomial of total degree `degree` in x, y |
 | `levelPoints` | points `[[x, y]…]`, radius | fit the plane to the discs of `radius` µm around the points (yb frame) and subtract it |
 | `removeSphere` / `removeCylinder` | radius? | least-squares sphere / cylinder (radial residuals; `radius` fixed or free when null), removed vertically |
-| `filter` | type `lowpass`\|`highpass`\|`bandpass`, cutoff (µm), cutoff2?, mode? | Gaussian filter (ISO 16610-21/-61, α = √(ln 2/π)). `bandpass`: cutoff = λs, cutoff2 = λc. mode `reflect` (default: half-sample symmetric extension at the border), `normalized` (order-0 Gaussian regression, i.e. weights renormalised over the measured points), `robust` (robust Gaussian regression, ISO 16610-71 style) |
+| `filter` | type `lowpass`\|`highpass`\|`bandpass`, cutoff (µm), cutoff2?, mode? | Gaussian filter (ISO 16610-21/-61, α = √(ln 2/π)). `bandpass`: cutoff = λs, cutoff2 = λc. mode `reflect` (default: half-sample symmetric extension at the border), `normalized` (order-0 Gaussian regression, i.e. weights renormalised over the measured points), `robust` (robust Gaussian regression, ISO 16610-71) |
 | `center` | | z − mean |
 | `zero` | | z − min |
 | `invert` | | min + max − z |
@@ -129,7 +179,8 @@ relative to the gauge RMS (1e−6 for float32 gauges).
 
 **Extension measures** (analysis outputs, evaluated by the binding): `formRadius`,
 `radialPsd`, `fourierPeak`, `acfMap`, `abbottCurveError`, `regionVolume`, `fitCircle`,
-`fitLine`, `sampleHeight`, `profileLine`, `cavities`. Their fields are in the case.
+`fitLine`, `sampleHeight`, `profileLine`, `cavities`. Their fields are in the case; the
+geometry they take (points, lines, boxes) is in the gauge frame.
 
 ## Judging
 
@@ -146,18 +197,19 @@ to make a result pass.
 
 ## Results
 
-A run produces one result file per implementation:
+A run produces one result file per implementation ([`results.schema.json`](results.schema.json)):
 
 ```json
 { "implementation": { "name": "…", "version": "…", "runtime": "…" },
   "specVersion": "1.0.0",
   "gauges": { "<gauge id>": { "ok": true, "maxRelDiff": 0 } },
   "cases": { "<case id>": { "status": "ok"|"unsupported"|"error", "value": 0.897, "nan": false, "error": "…", "ms": 0.4 } },
-  "date": "2026-10-13T12:00:00Z" }
+  "date": "2026-10-13T12:00:00.000Z" }
 ```
 
 JSON has no NaN or Infinity: NaN is `value: null, nan: true`, and ±∞ is clamped to ±1e308.
-`softgauge report` (npm) merges any number of result files into one web/CSV/LaTeX report.
+`softgauge report` (in both packages, with identical output) merges any number of result
+files into one web/CSV/LaTeX report.
 
 ## Files
 
@@ -166,9 +218,9 @@ ISO 25178-71 SDF file (binary64, or ASCII with 17 significant digits; heights an
 in metres as the format requires; NaN → the format's non-measured marker). The writer is
 [sdfio](https://pypi.org/project/sdfio/), an independent implementation, so the files
 carry no code shared with any implementation under test. Next to every file is a
-`<gauge>.json` sidecar with the fingerprint and every case on that gauge. Check the
-fingerprint first: it proves the software read the gauge correctly, before any
-parameter is judged.
+`<gauge>.json` sidecar with the fingerprint, every case on that gauge and the references
+they cite. Check the fingerprint first: it proves the software read the gauge correctly,
+before any parameter is judged.
 
 ## Versioning
 

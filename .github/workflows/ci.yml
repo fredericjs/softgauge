@@ -48,3 +48,28 @@ jobs:
         working-directory: python
       - run: pytest -q
         working-directory: python
+
+  parity:
+    # Both adapters run their example binding; each one's report of the two result files
+    # must be byte-identical (CSV, LaTeX) to the other's.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -e python
+      - name: results from both example bindings
+        run: |
+          mkdir -p parity/results
+          python -c "import json, sys; sys.path.insert(0, 'python/examples'); import softgauge; from naive_binding import NaiveBinding; json.dump(softgauge.run(NaiveBinding(), implementation={'name': 'naive-py'}), open('parity/results/naive-py.json', 'w'))"
+          node --input-type=module -e "import { run } from './js/src/index.js'; import { naiveBinding } from './js/examples/naive-binding.js'; import { writeFileSync } from 'node:fs'; writeFileSync('parity/results/naive-js.json', JSON.stringify(run(naiveBinding, { implementation: { name: 'naive-js' } })));"
+      - name: identical reports
+        run: |
+          node js/bin/softgauge.js report parity/results --out parity/js
+          softgauge report parity/results --out parity/py
+          cmp parity/js/results.csv parity/py/results.csv
+          cmp parity/js/results.tex parity/py/results.tex

@@ -36,9 +36,12 @@ def test_softgauge(case):
 ```
 
 `softgauge.run(binding)` runs everything at once and returns a result file;
+`softgauge report <results-dir>` merges result files into JSON, CSV and LaTeX;
 `softgauge export <dir>` writes the gauges as SDF files with JSON sidecars, for software
-that cannot be scripted. How to write a binding for your software:
-[docs/writing-a-binding.md](https://github.com/fredericjs/softgauge/blob/main/docs/writing-a-binding.md). The contract (conventions, operations, measures, judging) is in
-[SPEC.md](https://github.com/fredericjs/softgauge/blob/main/SPEC.md).
+that cannot be scripted. `examples/naive_binding.py` (in the repository) is a complete
+small binding. How to write a binding for your software:
+[docs/writing-a-binding.md](https://github.com/fredericjs/softgauge/blob/main/docs/writing-a-binding.md). The spec this package reads, and what
+its fields mean: [spec/](https://github.com/fredericjs/softgauge/tree/main/spec). The npm package
+(`npm install softgauge`) has the same API.
 
 MIT licensed.

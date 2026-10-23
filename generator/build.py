@@ -38,7 +38,7 @@ from fmt import dumps, exponential  # noqa: E402
 
 SPEC_VERSION = '1.0.0'
 
-# ── tiers (SPEC.md, Tiers) ────────────────────────────────────────────────────
+# ── tiers (spec/README.md, Tiers) ────────────────────────────────────────────────────
 # core       parameters of an unprocessed gauge: anything that can read the gauge can run it
 # operators  standard operations (levelling, filtering, masking, geometry…) measured on the array
 # extension  non-standard parameters, implementation-specific operations and analysis outputs

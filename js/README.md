@@ -19,14 +19,15 @@ const binding = {
   parameter: (s, name, args) => s[name](...args),
   toArray: (s) => ({ z: s.data, rows: s.rows, cols: s.cols, dx: s.dx, dy: s.dy }),
 };
-const spec = loadSpec();
-const results = run(spec, binding, { implementation: { name: 'mylib', version: '1.0' } });
-for (const c of spec.cases) console.log(c.id, judge(c, results.cases[c.id]).verdict);
+const results = run(binding, { implementation: { name: 'mylib', version: '1.0' } });
+for (const c of loadSpec().cases) console.log(c.id, judge(c, results.cases[c.id]).verdict);
 ```
 
+`new Runner(binding).case(c)` runs one case at a time (one test per case), `run` all of them.
 `examples/naive-binding.js` is a complete small binding. `npx softgauge report <results-dir>`
 merges result files into JSON, CSV and LaTeX. How to write a binding for your software:
-[docs/writing-a-binding.md](https://github.com/fredericjs/softgauge/blob/main/docs/writing-a-binding.md). The contract (conventions, operations,
-measures, judging) is in [SPEC.md](https://github.com/fredericjs/softgauge/blob/main/SPEC.md).
+[docs/writing-a-binding.md](https://github.com/fredericjs/softgauge/blob/main/docs/writing-a-binding.md). The spec this package reads, and what
+its fields mean: [spec/](https://github.com/fredericjs/softgauge/tree/main/spec). The Python package
+(`pip install softgauge`) has the same API.
 
 MIT licensed.

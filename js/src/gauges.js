@@ -7,7 +7,7 @@
 // Grid convention: row-major, `ny` rows × `nx` columns, pixel (r, c) sits at
 //   x = c·dx,  y = r·dy          (µm; row 0 is the FIRST row of the array)
 // and for the components that are defined in the "y measured from the bottom"
-// convention of crop/mask boxes (SPEC.md, Conventions), yb = (ny − 1 − r)·dy.
+// convention of crop/mask boxes (spec/README.md, Conventions), yb = (ny − 1 − r)·dy.
 //
 // A gauge is { nx, ny, dx, dy, parts: [component…], holes?, spikes?, dtype?, profile? }:
 //   z(r, c) = Σ parts, then spikes are added and holes set to NaN (non-measured).

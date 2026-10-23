@@ -3,7 +3,7 @@
 A **binding** connects softgauge to the software you want to validate. softgauge builds
 each gauge, hands its height array to the binding, asks it to apply the case's
 operations and evaluate the measure, then judges the number that comes back. The binding
-only translates between softgauge's vocabulary (SPEC.md) and your software's API. It
+only translates between softgauge's vocabulary ([the spec](../spec/README.md)) and your software's API. It
 contains no metrology of its own.
 
 ```
@@ -85,7 +85,7 @@ results = softgauge.run(MyLibBinding(), tier="core",
 **JavaScript**
 
 ```js
-import { loadSpec, selectCases, run, judge, Unsupported } from 'softgauge';
+import { run, Unsupported } from 'softgauge';
 import * as mylib from 'mylib';
 
 const binding = {
@@ -96,11 +96,7 @@ const binding = {
   },
 };
 
-const spec = loadSpec();
-const results = run(spec, binding, {
-  implementation: { name: 'mylib', version: mylib.version },
-  filter: (c) => c.tier === 'core',
-});
+const results = run(binding, { tier: 'core', implementation: { name: 'mylib', version: mylib.version } });
 ```
 
 If your software's parameter names differ from the ISO symbols, map them in
@@ -109,7 +105,7 @@ If your software's parameter names differ from the ISO symbols, map them in
 ## 3. Add operations
 
 `operators` cases (54) chain operations before measuring. Translate each `op` object
-(fields in SPEC.md, Operations) to your API, and throw `Unsupported` for the rest:
+(fields in [the spec](../spec/README.md#operations-caseops-applied-in-order), Operations) to your API, and throw `Unsupported` for the rest:
 
 ```python
     def apply(self, s, op, gauge):
@@ -145,7 +141,7 @@ Most operator cases are judged on the **output array** (`fieldError`, `sineAmpli
 
 `extension` cases (32) cover non-standard parameters and analysis outputs: form-fit
 radius, radial PSD, ACF map, region volume, edge fits, cavities… Their measure objects
-are described in SPEC.md, Measures, and carry their own fields. Implement the ones your
+are described in [the spec](../spec/README.md#measures-casemeasure), Measures, and carry their own fields. Implement the ones your
 software offers in `measure` and return `NotImplemented` / `undefined` for the others:
 
 ```python
@@ -177,7 +173,7 @@ def test_softgauge(case):
     check(runner, case, xfail=KNOWN_DEFECTS)
 ```
 
-A failure reports the value, the reference and its formula, the error, the limit and
+A failure reports the value, the reference and its formula (or text), the error, the limit and
 the basis of the tolerance. A known defect that starts passing fails the test, so the
 xfail list never goes stale.
 
@@ -186,20 +182,24 @@ xfail list never goes stale.
 ```js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { loadSpec, run, judge } from 'softgauge';
+import { Runner, selectCases, judge } from 'softgauge';
 
-test('softgauge', () => {
-  const spec = loadSpec(), res = run(spec, binding);
-  const failed = spec.cases.filter(c => ['fail', 'error'].includes(judge(c, res.cases[c.id]).verdict));
-  assert.deepEqual(failed.map(c => c.id), []);
-});
+const runner = new Runner(binding);           // caches gauges and operation chains across tests
+for (const c of selectCases(undefined, { tier: ['core', 'operators'] })) {
+  test(c.id, (t) => {
+    const j = judge(c, runner.case(c));
+    if (j.verdict === 'unsupported') return t.skip('unsupported');
+    assert.equal(j.verdict, 'pass', `value vs reference ${j.ref}, |error| ${Math.abs(j.error)} > ${j.limit}`);
+  });
+}
 ```
 
 **A report.** Write the object `run` returns to `results/<name>.json`, one file per
-implementation or version. Then:
+implementation or version. Then, with either package (the output is identical):
 
 ```bash
 npx softgauge report results/ --out report/
+softgauge report results/ --out report/
 ```
 
 ## 6. Conventions that trip bindings up
@@ -215,7 +215,7 @@ as a clean failure.
 | `Spd`, `Svd` / `Spc`, `Svc` | 1/µm² / 1/µm | convert from 1/mm² etc. |
 | `Smr(c)`, `Rmr(c)` | c in µm, in the frame of the data (no re-centring) | shift c if your software measures it from the mean or another datum |
 | `Smc(mr)`, `Rmc(mr)` | mr in % | |
-| `Std` | degrees, array frame (+x towards increasing row) | a y-up frame reads 180° − θ |
+| `Std` | degrees, counter-clockwise from +x with **y up the map** (ISO 25178-2, 3.2.15.1) | an array-frame angle (towards increasing row index) reads 180° − θ |
 | `rotate` | counter-clockwise, y up; pixel pitch preserved | |
 | masks | truthy = **excluded** from evaluation | invert if your mask marks the points to keep |
 | NaN | non-measured | return NaN (Python `float("nan")`, JS `NaN`) for an undefined parameter; `expectNaN` cases require it |
@@ -230,13 +230,13 @@ Two rules about handles:
 
 ## 7. Debugging a failure
 
-- **Read the case.** `reference.formula`, `basis` (where the tolerance comes from) and
+- **Read the case.** `reference.formula` (LaTeX) and `reference.text`, `method`, `basis` (where the tolerance comes from) and
   `note` usually say what convention is being tested. `discrete.value` is the exact
   value for the sampled gauge, and that is what you are judged against.
   - Python: `softgauge.select_cases(only="hybrid.pyramids")`
   - JS: `selectCases(spec, { only: 'hybrid.pyramids' })`
 - **Run one case.** Python: `softgauge.Runner(binding).case(case)`. JS:
-  `run(spec, binding, { filter: (c) => c.id === '…' })`.
+  `new Runner(binding).case(case)`.
 - **Check the gauge reached your software intact.** `results["gauges"][id]["ok"]` covers
   softgauge's builder. To check your loader, compute your software's mean, RMS, min and
   max of the loaded surface and compare them with `gauge["fingerprint"]`.
@@ -264,5 +264,5 @@ softgauge export gauges/ --tier core          # SDF (ISO 25178-71) + <gauge>.jso
 2. Compute the parameters listed under `cases` in the sidecar.
 3. Compare each one with `judgedReference` within `tol` (`|value − ref| ≤ abs + rel·|ref|`).
 
-To produce a report, enter the values into a result file (SPEC.md, Results), one entry
-per case id, and run `softgauge report`.
+To produce a report, enter the values into a result file ([spec/results.schema.json](../spec/results.schema.json)),
+one entry per case id, and run `softgauge report`.

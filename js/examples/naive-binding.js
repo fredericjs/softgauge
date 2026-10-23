@@ -6,9 +6,9 @@
 // It is the template for a real binding: replace load/apply/parameter with calls into
 // the software under test, and return its output from toArray.
 //
-//   import { loadSpec, run } from 'softgauge';
+//   import { run } from 'softgauge';
 //   import { naiveBinding } from 'softgauge/examples/naive-binding.js';
-//   const results = run(loadSpec(), naiveBinding, { implementation: { name: 'naive' } });
+//   const results = run(naiveBinding, { implementation: { name: 'naive' } });
 
 import { Unsupported } from '../src/index.js';
 

@@ -3,7 +3,7 @@ operations (mirrored in js/src/measures.js).
 
 A binding only has to hand back its result as a plain array, and every implementation is
 then measured by the same code: fieldError, sineAmplitude, nanMismatch, planeGradient and
-stat. Parameters ('param') and the extension measures stay with the binding (SPEC.md,
+stat. Parameters ('param') and the extension measures stay with the binding (spec/README.md,
 Measures).
 """
 from __future__ import annotations

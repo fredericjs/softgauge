@@ -45,18 +45,19 @@ def sidecar(gauge_id, spec=None, file_name=None):
     spec = load_spec() if spec is None else spec
     g = spec["gauges"][gauge_id]
     cases = [
-        {k: c.get(k) for k in ("id", "tier", "group", "ops", "measure", "unit", "standard", "reference", "discrete", "tol", "basis", "note", "expectNaN") if c.get(k) is not None}
+        {k: c.get(k) for k in ("id", "tier", "group", "cite", "ops", "measure", "unit", "standards", "method", "reference", "discrete", "expectNaN", "tol", "basis", "note") if c.get(k) is not None}
         | {"judgedReference": judged_reference(c)}
         for c in spec["cases"] if c["gauge"] == gauge_id
     ]
     return {
         "softgauge": spec["version"],
         "file": file_name,
-        "gauge": {k: g[k] for k in ("id", "title", "formula", "description", "nx", "ny", "dx", "dy") if k in g}
+        "gauge": {k: g[k] for k in ("id", "title", "formula", "description", "cite", "nx", "ny", "dx", "dy") if k in g}
         | {"profile": bool(g.get("profile")), "units": "lengths and heights in µm (the SDF file itself stores metres)"},
         "conventions": spec["conventions"],
         "fingerprint": g["fingerprint"],
         "cases": cases,
+        "references": {k: spec["references"][k] for k in sorted({k for x in [g, *cases] for k in x.get("cite", [])})},
     }
 
 

@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use softgauge, please cite it as below."
+title: "softgauge: analytic soft gauges for surface texture software"
+type: software
+authors:
+  - family-names: Schell
+    given-names: Frederic
+license: MIT
+repository-code: "https://github.com/fredericjs/softgauge"
+keywords:
+  - surface texture
+  - surface metrology
+  - ISO 25178
+  - ISO 21920
+  - soft gauge
+  - software validation
+version: 0.1.0

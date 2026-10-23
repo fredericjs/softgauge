@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { loadSpec, selectCases, buildHeights, verifyGauge, judge, arrayMeasure, run, report, Unsupported } from '../src/index.js';
+import { loadSpec, selectCases, buildHeights, verifyGauge, judge, arrayMeasure, Runner, run, report, Unsupported } from '../src/index.js';
 import { naiveBinding } from '../examples/naive-binding.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -63,7 +63,7 @@ test('selectCases', () => {
 });
 
 test('the naive binding passes every case it supports', () => {
-  const res = run(spec, naiveBinding, { implementation: { name: 'naive' } });
+  const res = run(naiveBinding, { implementation: { name: 'naive' } });
   const tally = { pass: 0, fail: 0, error: 0, unsupported: 0 }, bad = [];
   for (const c of spec.cases) {
     const v = judge(c, res.cases[c.id]).verdict;
@@ -77,4 +77,23 @@ test('the naive binding passes every case it supports', () => {
   assert.equal(r.json.cases.length, spec.cases.length);
   assert.equal(r.implementations[0].tally.pass, tally.pass);
   assert.ok(r.csv.split('\n').length > spec.cases.length);
+});
+
+test('run filters, reports every case through onCase and matches the Runner', () => {
+  const seen = [];
+  const res = run(naiveBinding, { tier: 'core', domain: 'profile', onCase: (c, r, j) => seen.push([c.id, j.verdict]) });
+  const ids = selectCases(spec, { tier: 'core', domain: 'profile' }).map(c => c.id);
+  assert.deepEqual(Object.keys(res.cases), ids);
+  assert.deepEqual(seen.map(s => s[0]), ids);
+  const runner = new Runner(naiveBinding);
+  const c = spec.cases.find(k => k.id === 'height.sine.Sq');
+  assert.equal(judge(c, runner.case(c)).verdict, 'pass');
+  assert.ok(runner.gauges.sine.ok);
+});
+
+test('report escapes LaTeX specials once', () => {
+  const g = { ...spec.gauges.plane, title: String.raw`a\b {c} 50 % x_y ~^` };
+  const c = { ...spec.cases.find(k => k.id === 'height.plane.Sq'), group: 'G' };
+  const r = report({ ...spec, gauges: { plane: g }, cases: [c] }, [{ key: 'k', implementation: { name: 'n' }, cases: {}, gauges: {} }]);
+  assert.ok(r.tex.includes(String.raw`a\textbackslash{}b \{c\} 50 \% x\_y \textasciitilde{}\textasciicircum{}`), r.tex);
 });

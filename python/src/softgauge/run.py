@@ -6,7 +6,7 @@ softgauge knows nothing about the software under test. A binding is any object w
     ``z`` is a fresh ``(ny, nx)`` float array (``(1, nx)`` for a profile gauge,
     ``gauge["profile"]`` true), heights in µm, steps ``gauge["dx"]``/``gauge["dy"]``.
 ``apply(handle, op, gauge) -> handle``
-    One operation of ``case["ops"]`` (SPEC.md, Operations). Must not modify ``handle``:
+    One operation of ``case["ops"]`` (spec/README.md, Operations). Must not modify ``handle``:
     chains are cached.
 ``parameter(handle, name, args, gauge) -> float``
     Measure kind 'param'.
@@ -20,7 +20,6 @@ cannot do: the case is reported 'unsupported', never 'fail'.
 """
 from __future__ import annotations
 
-import datetime
 import json
 import math
 import time
@@ -28,6 +27,7 @@ import time
 from .gauges import build_heights, verify_gauge
 from .judge import judge
 from .measures import ARRAY_MEASURES, Unsupported, array_measure
+from .numfmt import utc_now
 from .spec import load_spec, select_cases
 
 __all__ = ["Runner", "run"]
@@ -104,9 +104,10 @@ class Runner:
 
 def run(binding, spec=None, *, implementation=None, cases=None, on_case=None, **filters):
     """Run ``cases`` (default: the spec's cases filtered by ``tier``/``domain``/``group``/``only``)
-    through ``binding`` and return the result file of SPEC.md, Results.
+    through ``binding`` and return the result file of spec/README.md, Results.
 
-    ``on_case(case, result, verdict)`` is called after each case.
+    ``on_case(case, result, judgement)`` is called after each case, with the judgement of
+    :func:`softgauge.judge`.
     """
     runner = Runner(binding, spec)
     selected = select_cases(runner.spec, **filters) if cases is None else cases
@@ -115,11 +116,11 @@ def run(binding, spec=None, *, implementation=None, cases=None, on_case=None, **
         res = runner.case(c)
         out[c["id"]] = res
         if on_case:
-            on_case(c, res, judge(c, res)["verdict"])
+            on_case(c, res, judge(c, res))
     return {
         "implementation": implementation or {"name": "unnamed"},
         "specVersion": runner.spec["version"],
         "gauges": runner.gauges,
         "cases": out,
-        "date": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "date": utc_now(),
     }
