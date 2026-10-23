@@ -4,7 +4,7 @@
 (ISO 25178) and profile (ISO 21920) surface texture software against synthetic surfaces
 whose parameters and operation results are known in **closed form**: planes, sinusoids,
 egg-crates, material-ratio ramps, spheres, cylinders, pockets, Gaussian bumps…
-96 gauges and 547 cases. References are judged against the **sampled** surface where it
+97 gauges and 549 cases. References are judged against the **sampled** surface where it
 has a closed form, so tolerances are floating-point tight. Elsewhere every tolerance
 carries a derived bound. None is tuned to make a result pass.
 

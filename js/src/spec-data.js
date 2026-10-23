@@ -916,6 +916,64 @@ export default {
     ]
    }
   },
+  "saddle": {
+   "id": "saddle",
+   "title": "Saddle",
+   "formula": "z = k·x·y",
+   "description": "Hyperbolic paraboloid with its centre on the first grid corner and anisotropic sampling. No grid cell is planar, so the triangulated area depends on how a cell is split into triangles (ISO 25178-2 eq. D.15 averages both diagonals); along every grid line z is linear, so every edge difference is exact and the D.15 area has a closed form.",
+   "nx": 41,
+   "ny": 81,
+   "dx": 0.5,
+   "dy": 0.25,
+   "parts": [
+    {
+     "type": "poly",
+     "xc": 0,
+     "yc": 0,
+     "terms": [
+      [
+       1,
+       1,
+       0.05
+      ]
+     ]
+    }
+   ],
+   "fingerprint": {
+    "n": 3321,
+    "mean": 5,
+    "rms": 6.729134416847385,
+    "min": 0,
+    "max": 20,
+    "probes": [
+     [
+      0,
+      0,
+      0
+     ],
+     [
+      80,
+      40,
+      20
+     ],
+     [
+      40,
+      20,
+      5
+     ],
+     [
+      20,
+      30,
+      3.75
+     ],
+     [
+      60,
+      5,
+      1.875
+     ]
+    ]
+   }
+  },
   "bearing": {
    "id": "bearing",
    "title": "Material-ratio gauge",
@@ -6471,6 +6529,63 @@ export default {
    "reference": {
     "value": 0.6230589874905323,
     "formula": "100·(√(1 + A² + B²) − 1)"
+   },
+   "tol": {
+    "rel": 1e-9,
+    "abs": 1e-12
+   },
+   "basis": "floating-point round-off only (the reference is exact for the sampled gauge)",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "",
+   "id": "hybrid.saddle.Sdq",
+   "group": "Hybrid parameters",
+   "gauge": "saddle",
+   "measure": {
+    "kind": "param",
+    "name": "Sdq",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "reference": {
+    "value": 0.8164965809277261,
+    "formula": "k·√((W² + H²)/3)"
+   },
+   "discrete": {
+    "value": 0.8203149801549808,
+    "formula": "k·√(⟨y²⟩ + ⟨x²⟩) over the rows / columns (forward differences are exact)"
+   },
+   "tol": {
+    "rel": 1e-9,
+    "abs": 1e-12
+   },
+   "basis": "floating-point round-off only (the reference is exact for the sampled gauge)",
+   "tier": "core",
+   "domain": "areal"
+  },
+  {
+   "ops": [],
+   "unit": "%",
+   "id": "hybrid.saddle.Sdr",
+   "group": "Hybrid parameters",
+   "gauge": "saddle",
+   "measure": {
+    "kind": "param",
+    "name": "Sdr",
+    "args": []
+   },
+   "standard": "ISO 25178-2:2021",
+   "note": "ISO 25178-2:2021 D.3: each cell is triangulated along both diagonals and the two areas are averaged (eq. D.15). Taking a single triangle per cell is exact only for planar cells.",
+   "reference": {
+    "value": 28.078927527340248,
+    "formula": "100·[(1/(W·H))·∬ √(1 + k²(x² + y²)) dx dy − 1]"
+   },
+   "discrete": {
+    "value": 28.0832145143437,
+    "formula": "100·[trapezoid-weighted mean of √(1 + k²(x² + y²)) over the grid points − 1]"
    },
    "tol": {
     "rel": 1e-9,

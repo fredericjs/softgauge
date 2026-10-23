@@ -11,7 +11,7 @@
 // build-spec.js evaluates this file into the language-neutral spec.json.
 
 import {
-  bernoulliHeights, discreteUniformMoments, sineAreaRatio, sampledSineAreaRatio, gaussLowpassT, GAUSS_TRUNC_BOUND,
+  bernoulliHeights, discreteUniformMoments, sineAreaRatio, sampledSineAreaRatio, saddleAreaRatio, sampledSaddleAreaRatio, gaussLowpassT, GAUSS_TRUNC_BOUND,
   piecewiseLinearCurve, sineCurve, polynomialCurve, tlsHyperplane, acfDecayLengths, sumCos,
 } from './reference.js';
 import { buildHeights } from '../js/src/gauges.js';
@@ -116,6 +116,15 @@ gauge('pyramids', {
   title: 'Pyramid field', formula: 'z = A·[T(x/λ) + T(y/λ)], T = triangle wave',
   description: 'Sum of two triangle waves whose kinks fall on grid lines. Every grid cell is a plane with |∂z/∂x| = |∂z/∂y| = 4A/λ, so Sdq and the triangulated area are exact.',
   nx: 201, ny: 161, dx: 0.5, dy: 0.5, parts: [{ type: 'triangle', ...TRI, axes: 'xy' }],
+});
+
+// Saddle (hyperbolic paraboloid): every grid cell is twisted, so the two ways of splitting a
+// cell into triangles differ. The corner at the origin sits on a grid corner; dx ≠ dy.
+const SAD = { k: 0.05 };
+gauge('saddle', {
+  title: 'Saddle', formula: 'z = k·x·y',
+  description: 'Hyperbolic paraboloid with its centre on the first grid corner and anisotropic sampling. No grid cell is planar, so the triangulated area depends on how a cell is split into triangles (ISO 25178-2 eq. D.15 averages both diagonals); along every grid line z is linear, so every edge difference is exact and the D.15 area has a closed form.',
+  nx: 41, ny: 81, dx: 0.5, dy: 0.25, parts: [{ type: 'poly', xc: 0, yc: 0, terms: [[1, 1, SAD.k]] }],
 });
 
 // Material-ratio gauge: the heights ARE the samples of a prescribed curve.
@@ -486,6 +495,18 @@ const ref = (value, formula) => ({ value, formula });
     add({ id: `hybrid.${id}.Sdq`, group: grp, gauge: id, measure: param('Sdq'), standard: std, reference: ref(Math.hypot(A, B), '√(A² + B²)'), tol: FP(), basis: FP_BASIS });
     add({ id: `hybrid.${id}.Sdr`, group: grp, gauge: id, measure: param('Sdr'), unit: '%', standard: std, note,
       reference: ref(100 * (Math.sqrt(1 + A * A + B * B) - 1), '100·(√(1 + A² + B²) − 1)'), tol: FP(), basis: FP_BASIS });
+  }
+  // saddle: twisted cells (ISO 25178-2 D.15 triangulation)
+  {
+    const g = G.saddle, { k } = SAD, W = (g.nx - 1) * g.dx, H = (g.ny - 1) * g.dy;
+    const msq = (n, d) => { let t = 0; for (let i = 0; i < n; i++) t += (i * d) ** 2; return t / n; };
+    add({ id: 'hybrid.saddle.Sdq', group: grp, gauge: 'saddle', measure: param('Sdq'), standard: std,
+      reference: ref(k * Math.sqrt((W * W + H * H) / 3), 'k·√((W² + H²)/3)'),
+      discrete: ref(k * Math.sqrt(msq(g.ny, g.dy) + msq(g.nx, g.dx)), 'k·√(⟨y²⟩ + ⟨x²⟩) over the rows / columns (forward differences are exact)'), tol: FP(), basis: FP_BASIS });
+    add({ id: 'hybrid.saddle.Sdr', group: grp, gauge: 'saddle', measure: param('Sdr'), unit: '%', standard: std,
+      note: 'ISO 25178-2:2021 D.3: each cell is triangulated along both diagonals and the two areas are averaged (eq. D.15). Taking a single triangle per cell is exact only for planar cells.',
+      reference: ref(100 * saddleAreaRatio(k, W, H), '100·[(1/(W·H))·∬ √(1 + k²(x² + y²)) dx dy − 1]'),
+      discrete: ref(100 * sampledSaddleAreaRatio(k, g.nx, g.ny, g.dx, g.dy), '100·[trapezoid-weighted mean of √(1 + k²(x² + y²)) over the grid points − 1]'), tol: FP(), basis: FP_BASIS });
   }
   // smooth sinusoid: continuous vs sampled closed forms
   const g = G['sine-hybrid'], A = 1, k = TAU / 16, a = A * k, ap = (2 * A * Math.sin(Math.PI / HYB_P)) / g.dx;

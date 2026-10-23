@@ -57,7 +57,7 @@ against the implementation, so don't use errors for unsupported features.
 
 ## 2. Start with the core tier
 
-`core` cases are standard parameters of an unprocessed gauge (461 of the 547 cases).
+`core` cases are standard parameters of an unprocessed gauge (463 of the 549 cases).
 They need only `load` and `parameter`.
 
 **Python**

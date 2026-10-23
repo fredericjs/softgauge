@@ -98,6 +98,32 @@ export function sampledSineAreaRatio(ap, P) {
   return s / P - 1;
 }
 
+/** Developed area ratio of the saddle z = k·x·y over [0, W] × [0, H]: mean of √(1 + k²(x² + y²)) − 1. */
+export function saddleAreaRatio(k, W, H) {
+  const g = (x) => integrate((y) => Math.sqrt(1 + k * k * (x * x + y * y)), 0, H);
+  return integrate(g, 0, W) / (W * H) - 1;
+}
+
+/**
+ * The same ratio for the SAMPLED saddle (nx × ny points, steps dx, dy), triangulated per
+ * ISO 25178-2 eq. (D.15). Along a grid line z is linear, so every edge difference is exact:
+ * the triangle at a cell corner (spanned by its x and y edges) has area ½·Δx·Δy·√(1 + |∇z|²)
+ * with the gradient (k·y, k·x) AT that corner, and the cell area is ¼·Σ_corners of the four
+ * triangles' doubled areas. Summed over the cells, the ratio is the trapezoid-weighted mean
+ * of √(1 + k²(x² + y²)) over the grid points (weight ½ on the edges, ¼ at the corners) − 1.
+ */
+export function sampledSaddleAreaRatio(k, nx, ny, dx, dy) {
+  let s = 0;
+  for (let r = 0; r < ny; r++) {
+    const wy = r === 0 || r === ny - 1 ? 0.5 : 1;
+    for (let c = 0; c < nx; c++) {
+      const wx = c === 0 || c === nx - 1 ? 0.5 : 1;
+      s += wx * wy * Math.sqrt(1 + k * k * ((c * dx) ** 2 + (r * dy) ** 2));
+    }
+  }
+  return s / ((nx - 1) * (ny - 1)) - 1;
+}
+
 // ── filtering (ISO 16610-21 / -61 Gaussian) ──────────────────────────────────
 
 export const GAUSS_ALPHA = Math.sqrt(Math.LN2 / Math.PI);
